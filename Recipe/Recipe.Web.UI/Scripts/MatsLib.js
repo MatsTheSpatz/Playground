@@ -1,6 +1,13 @@
 ﻿//
 
-var lib = (function () {
+$(document).ready(function () {
+    $table = $('table');
+    lib.init($table, 2);
+    lib.appendRow();
+    alert('ok');
+});
+
+var OLDlib = (function () {
 
     // string constants
     var deleteButtonClassName = 'deleteButton';

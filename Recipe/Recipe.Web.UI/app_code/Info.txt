@@ -1,0 +1,5 @@
+﻿
+Place to store "reusable razor helper"
+  > "app_code" is a magical folder with ASP.NET
+  > Runtime will compile any razor view in this folder and make their helpers available as static methods.
+  > Because they are static, they don't have access to content helpers (e.g. Url)
