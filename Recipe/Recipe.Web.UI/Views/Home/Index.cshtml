@@ -1,0 +1,73 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+
+<h2>@ViewBag.Message</h2>
+<p>
+    To learn more about ASP.NET MVC visit <a href="http://asp.net/mvc" title="ASP.NET MVC Website">http://asp.net/mvc</a>.
+</p>
+
+
+<form action="About" autocomplete="off">
+<table class="ingredientTable" Border="1">
+    <tr class="ingredientData">
+        <th>
+            Zutaten
+        </th>
+        <th>
+            Optionale Instruktionen
+        </th>
+    </tr>
+    <tr class="ingredientData">
+        <td>
+            <input type="text" maxlength="22" size="22" autofocus="autofocus" />
+        </td>
+        <td>
+            <textarea rows="2" cols="40" placeholder="test"></textarea>
+        </td>
+        <td>
+            <input class="deleteButton" type="button" value="-" />
+        </td>
+    </tr>
+</table>
+<input class="addIngredient" value="+" type="button" />
+</form>
+<input class="load" value="load ajax" type="button" />
+<input class="uiTest" value="UI Test Button" type="button" />
+<button class="upButton">Move up</button>
+<button class="downButton">Move down</button>
+<input class="uiTest" type="submit" value="A submit button"/>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $table = $('table');
+        lib.init($table, 2);
+
+        $('.upButton').button({ icons: { primary: 'ui-icon-arrowthick-1-s'} });
+        $('.downButton').button({ icons: { primary: 'ui-icon-circle-arrow-n'} });
+
+
+        $('input.addIngredient').click(function (event) {
+            lib.appendRow();
+        });
+
+        $('input.load').click(function (event) {
+
+            var jqxhr = $.getJSON(
+                'http://localhost:49582/Home/Test',
+                { test: "SomeData" },
+                function () { alert("success"); })
+            .success(function () { alert(arguments.length); })
+            .error(function () {
+                for (i = 0; i < arguments.length; i++)
+                    alert(arguments[i]);
+            })
+            .complete(function () { alert("complete"); });
+
+
+        });
+
+    });    
+</script>
