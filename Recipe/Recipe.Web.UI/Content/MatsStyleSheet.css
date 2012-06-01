@@ -1,0 +1,33 @@
+﻿
+body {
+    font-size: 10px;
+}
+span.ui-icon {
+    float: left;
+    margin: 6px 0;
+}
+#sortableIngredients {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 80%;
+}
+#sortableIngredients li {
+    background: none repeat scroll 0 0 #FAFAFA;
+    border-color: gray;
+    border-radius: 6px 6px 6px 6px;
+    font-size: 0.9em;
+    height: 28px;
+    margin: 0 0 6px;
+    padding: 0.4em 0.4em 0.4em 1.5em;
+}
+#sortableIngredients input {
+    background: url("themes/base/images/ui-bg_gloss-wave_60_fece2f_500x100.png") repeat-x scroll 50% 50% #FECE2F;
+    border-radius: 5px 5px 5px 5px;
+    font-size: 1.5em;
+    margin: 1px;
+    padding: 5px;
+}
+#sortableIngredients button {
+    bottom:  2px;
+}

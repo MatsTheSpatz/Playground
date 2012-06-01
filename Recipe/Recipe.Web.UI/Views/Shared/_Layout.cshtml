@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>@ViewBag.Title</title>
-    <link href="../../Content/themes/MatsStyleSheet.css" rel="stylesheet" type="text/css" />
+    <link href="../../Content/MatsStyleSheet.css" rel="stylesheet" type="text/css" />
     <link href="../../Content/themes/base/jquery-ui-1.8.20.custom.css" rel="stylesheet" type="text/css" />
     @Content.Script("jquery-1.7.2.js", Url)
     @Content.Script("jquery-ui-1.8.19.js", Url)
@@ -19,10 +19,10 @@
                 @Html.Partial("_LogOnPartial")
             </div>
             <div id="menucontainer">
-                <ul id="menu">
+            @*    <ul id="menu">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
-                </ul>
+                </ul>*@
             </div>
         </div>
         <div id="main">

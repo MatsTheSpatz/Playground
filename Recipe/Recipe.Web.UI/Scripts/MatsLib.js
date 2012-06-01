@@ -1,10 +1,13 @@
 ﻿//
 
 $(document).ready(function () {
-    $table = $('table');
-    lib.init($table, 2);
-    lib.appendRow();
-    alert('ok');
+    var $list = $('ul').first();
+    lib.init($list, 5);
+
+    var $addButton = $('button[data-button-action="add"]');
+    lib.setAddButton($addButton);
+    //    lib.appendRow();
+
 });
 
 var OLDlib = (function () {

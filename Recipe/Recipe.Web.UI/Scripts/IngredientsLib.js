@@ -6,100 +6,100 @@ var lib = (function () {
     var iconMap = new Array();
     iconMap['up'] = 'ui-icon-circle-arrow-n';
     iconMap['down'] = 'ui-icon-circle-arrow-s';
+    iconMap['add'] = 'ui-icon-circle-arrow-s';
+    iconMap['delete'] = 'ui-icon-circle-arrow-s';
 
-    // string constants
-    var deleteButtonClassName = 'deleteButton';
-    var deleteButtonClassSelector = '.' + deleteButtonClassName;
-
-    // the table managed by this library.
-    var $table;
+    // the list managed by this library.
+    var $list;
+    var $addButton;
 
     // private functions
-    function subscribe($trElement) {
-        $trElement.find(deleteButtonClassSelector).click(onDeleteClicked);
+    function subscribe($button) {
+        $button.click(onButtonClicked);
     }
 
-
-    function onDeleteClicked(event) {
+    function onButtonClicked(event) {
         var $target = $(event.target);
-        var $row = $target.parent().parent();
+        var buttonAction = $target.attr("data-button-action");
 
-        if (!$row || !$row.is('tr')) {
-            throw ('unexpected nesting of elements. delete button is supposed to be in row.');
+        if (buttonAction == 'add') {
+            addRow();
         }
-
-        $row.remove();
+        else if (buttonAction == 'delete') {
+            var $item = $target.parent('li');
+            $item.remove();
+        }
+        else {
+            alert("button action not found. Command = " + buttonAction);
+        }
     }
 
     function convertToUiElement($element) {
         var $buttons = $('button[data-button=true]', $element);
         $buttons.each(function () {
-            $button = $(this);
-
-            var iconType = $button.attr('data-button-icon');
-            if (!iconType) {
-                $button.button();
-            }
-            else {
-                var iconName = iconMap[iconType];
-                $button.button({ icons: { primary: iconName} });
-            }
+            convertToButton($(this));
         });
     }
 
+    function convertToButton($button) {
+        var iconType = $button.attr('data-button-icon');
+        if (!iconType) {
+            $button.button();
+        }
+        else {
+            var iconName = iconMap[iconType];
+            $button.button({ icons: { primary: iconName} });
+        }
+
+        subscribe($button);
+    }
+
+    function addRow() {
+
+        var elements = '<span class="ui-icon ui-icon-arrowthick-2-n-s"></span> \
+                        <input type="text" maxlength="40" size="40" /> \
+                        <button data-button="true" data-button-icon="delete" data-button-action="delete">Delete</button>';
+
+        var $li = $(document.createElement('li'));
+        $li.html(elements);
+        $li.addClass('ui-state-default');
+        $list.append($li);
+
+        // convert new inner elements to jQuery UI button
+        convertToUiElement($li);
+    }
+
     return {
-        b: 12,
 
-        init: function ($tableElement, numberOfInitialRows) {
+        init: function ($listElement, numberOfInitialRows) {
 
-            if (!$tableElement) {
-                throw ('initialization failure in init(): table element is mandatory argument.');
+            if (!$listElement) {
+                throw ('initialization failure in init(): list element is mandatory argument.');
             }
 
-            if (!$tableElement.is('table')) {
-                throw ('initialization failure in init(): table element must be of type table.');
+            if (!$listElement.is('ul')) {
+                throw ('initialization failure in init(): list element must be of type <ul>.');
             }
 
-            if (!$tableElement || $tableElement.length != 1) {
-                throw ('initialization failure in init(): only one table element must be passed.');
+            if (!$listElement || $listElement.length != 1) {
+                throw ('initialization failure in init(): only one list element must be passed.');
             }
 
-            $table = $tableElement;
+            $list = $listElement;
+            $list.sortable();
 
             for (var i = 0; i < numberOfInitialRows; i++) {
-                this.appendRow();
+                addRow();
+            }
+        },
+
+        setAddButton: function ($button) {
+            if (!$button) {
+                throw ('invalid add button.');
             }
 
-        },
-
-        appendRow: function () {
-
-            var elements = ' \
-                <td> \
-                    <input type="text" maxlength="40" size="40" autofocus="autofocus" /> \
-                </td> \
-                <td> \
-                    <table class="actionTable"> \
-                        <tr> \
-                            <td><button class="moveUp" data-button="true" data-button-icon="up">Move up</button></td> \
-                            <td><button class="moveDown" data-button="true">Move up</button></td> \
-                            <td><button class="delete" data-button="true">Delete</button></td> \
-                            <td><button class="insert" data-button="true">Insert</button></td> \
-                        </tr> \
-                    </table> \
-                </td> ';
-
-            var $tr = $(document.createElement('tr'));
-            $tr.html(elements);
-            $table.append($tr);
-
-            // convert to jQuery UI button
-            convertToUiElement($tr);
-
-            // hook up events.
-            subscribe($tr);
-        },
-
-        d: 12
+            $addButton = $button;
+            convertToButton($addButton);
+        }
     };
 })();
