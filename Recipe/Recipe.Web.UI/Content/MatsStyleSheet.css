@@ -31,3 +31,6 @@ span.ui-icon {
 #sortableIngredients button {
     bottom:  2px;
 }
+
+
+input[datalinetype=header] { color: red; }

@@ -35,10 +35,35 @@ var lib = (function () {
     }
 
     function convertToUiElement($element) {
+        // buttons
         var $buttons = $('button[data-button=true]', $element);
         $buttons.each(function () {
             convertToButton($(this));
         });
+
+        // combobox
+        $('select', $element).each(function () {
+            $(this).combobox({
+                selected: function (event, ui) {
+                    var selection = ui.item.value;
+                    var $ingredientItem = $(event.target).parent('.ingredient-item');
+                    onTypeSelected($ingredientItem, selection);
+                }
+            });
+        });
+    }
+
+    function onTypeSelected($ingredientItem, selection) {
+        $textbox = $('input', $ingredientItem);
+        
+        if (selection == 'ingredient') {
+            $textbox.attr('data-line-type', 'ingredient');
+        }
+        else if (selection == 'header') {
+            $textbox.attr('datalinetype', 'header');
+        } else {
+            throw ('uexpected selection ' + selection + ' in onTypeSelected.');
+        }
     }
 
     function convertToButton($button) {
@@ -58,11 +83,13 @@ var lib = (function () {
 
         var elements = '<span class="ui-icon ui-icon-arrowthick-2-n-s"></span> \
                         <input type="text" maxlength="40" size="40" /> \
-                        <button data-button="true" data-button-icon="delete" data-button-action="delete">Delete</button>';
+                        <button data-button="true" data-button-icon="delete" data-button-action="delete">Delete</button> \
+                        <select><option value="ingredient">Ingredient</option><option value="header">Subsection Header</option></select>';
 
         var $li = $(document.createElement('li'));
         $li.html(elements);
         $li.addClass('ui-state-default');
+        $li.addClass('ingredient-item');
         $list.append($li);
 
         // convert new inner elements to jQuery UI button

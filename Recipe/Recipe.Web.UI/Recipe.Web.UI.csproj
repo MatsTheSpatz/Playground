@@ -145,6 +145,7 @@
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="Content\MatsStyleSheet.css" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\ComboBoxWidget.js" />
     <Content Include="Scripts\IngredientsLib.js" />
     <Content Include="Scripts\jquery-1.7.2-vsdoc.js" />
     <Content Include="Scripts\jquery-1.7.2.js" />

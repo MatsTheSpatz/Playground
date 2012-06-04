@@ -8,6 +8,40 @@ $(document).ready(function () {
     lib.setAddButton($addButton);
     //    lib.appendRow();
 
+    //    $('select').each(function () {
+    //        var $ul = $(document.createElement('ul'));
+
+    //        $('option', $select).each(function () {
+    //            var $li = $(document.createElement('li'));
+    //            $li.text($(this).text());
+    //            $ul.append($li);
+    //        });
+
+    //        $(this).replaceWith($ul);
+    //    });
+
+//	$( "select" ).combobox();
+
+
+
+//    $('select').replaceWith(function () {
+//        var $ul = $(document.createElement('ul'));
+//        $ul.addClass('selectReplacement');
+
+//        var i = 0;
+//        $('option', $(this)).each(function () {
+//            var $li = $(document.createElement('li'));
+//            $li.text($(this).text());
+
+//            if (i == 0) {
+//                i = 1;
+//                $li.addClass('selected');
+//            }
+//            $ul.append($li);
+//        });
+
+//        return $ul;
+//    });
 });
 
 var OLDlib = (function () {
@@ -76,3 +110,7 @@ var OLDlib = (function () {
         d:12
     };
 })();
+
+
+
+
