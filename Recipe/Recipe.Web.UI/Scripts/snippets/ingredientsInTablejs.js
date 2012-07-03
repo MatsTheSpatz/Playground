@@ -1,50 +1,4 @@
-﻿//
-
-$(document).ready(function () {
-    var $list = $('ul').first();
-    lib.init($list, 5);
-
-    var $addButton = $('button[data-button-action="add"]');
-    lib.setAddButton($addButton);
-    //    lib.appendRow();
-
-    //    $('select').each(function () {
-    //        var $ul = $(document.createElement('ul'));
-
-    //        $('option', $select).each(function () {
-    //            var $li = $(document.createElement('li'));
-    //            $li.text($(this).text());
-    //            $ul.append($li);
-    //        });
-
-    //        $(this).replaceWith($ul);
-    //    });
-
-//	$( "select" ).combobox();
-
-
-
-//    $('select').replaceWith(function () {
-//        var $ul = $(document.createElement('ul'));
-//        $ul.addClass('selectReplacement');
-
-//        var i = 0;
-//        $('option', $(this)).each(function () {
-//            var $li = $(document.createElement('li'));
-//            $li.text($(this).text());
-
-//            if (i == 0) {
-//                i = 1;
-//                $li.addClass('selected');
-//            }
-//            $ul.append($li);
-//        });
-
-//        return $ul;
-//    });
-});
-
-var OLDlib = (function () {
+﻿var OLDlib = (function () {
 
     // string constants
     var deleteButtonClassName = 'deleteButton';
@@ -72,7 +26,7 @@ var OLDlib = (function () {
 
     return {
         b: 12,
-        
+
         init: function ($tableElement, numberOfInitialRows) {
 
             if (!$tableElement) {
@@ -88,11 +42,11 @@ var OLDlib = (function () {
             }
 
             $table = $tableElement;
-            
+
             for (var i = 0; i < numberOfInitialRows; i++) {
                 this.appendRow();
             }
-            
+
         },
 
         appendRow: function () {
@@ -107,10 +61,6 @@ var OLDlib = (function () {
             subscribe($tr);
         },
 
-        d:12
+        d: 12
     };
 })();
-
-
-
-

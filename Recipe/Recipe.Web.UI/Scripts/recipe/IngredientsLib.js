@@ -1,7 +1,10 @@
-﻿//
+﻿
+// Namespace 'recipe'
+if (typeof recipe == 'undefined') {
+    recipe = {};
+}
 
-
-var lib = (function () {
+recipe.lib = (function () {
 
     var iconMap = new Array();
     iconMap['up'] = 'ui-icon-circle-arrow-n';

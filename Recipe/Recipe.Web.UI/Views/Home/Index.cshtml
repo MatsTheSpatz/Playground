@@ -3,15 +3,13 @@
 }
 <h2>@ViewBag.Message</h2>
 
-
-
-<form action="About" autocomplete="off">
+@*<form action="About" autocomplete="off">
     <div class="ingredients">
         <table class="ingredientTable" data-info="hook">
             <!-- Ingredients added here -->
         </table>
     </div>
-</form>
+</form>*@
 
 
 
@@ -30,49 +28,19 @@
 </div>
 
 
+@*
+<select><option value="var1">Ingredient</option><option value="var2">Subsection Header</option></select>*@
 
-<select><option value="var1">Ingredient</option><option value="var2">Subsection Header</option></select>
-
-
-
- 
-<ul data-bind="foreach: ingredients">
-    <li>
-        <span data-bind="text: text"></span>
-    </li>
-</ul>
-New item:    
-<input data-bind='value: itemToAdd, valueUpdate: "afterkeydown"' />
-<button data-bind="click: addItem">Add</button>    
 
 <script type="text/javascript">
-    
+    $(document).ready(function () {
+        var $list = $('ul').first();
+        recipe.lib.init($list, 5);
 
-    var Ingredient = function(text, type) {
-        this.text = ko.observable(text);
-        this.type = ko.observable(type);
-    };
-
-    var ViewModel = function (initalIngredients) {
-        this.ingredients = ko.observableArray(initalIngredients);
-
-        this.itemToAdd = ko.observable("");
-        this.addItem = function () {
-            if (this.itemToAdd() != "") {
-                this.ingredients.push(new Ingredient(this.itemToAdd(),"rrr"));
-                this.itemToAdd("");
-            }
-        }.bind(this);  // Ensure that "this" is always this view model
-    };
-
-    var initialIngredients = [new Ingredient("A", "B"), new Ingredient("C", "D")];
-    var viewModel = new ViewModel(initialIngredients);
-    ko.applyBindings(viewModel);
-
-    viewModel.ingredients.subscribe(function (value) {
-        alert('changed');
+        var $addButton = $('button[data-button-action="add"]');
+        recipe.lib.setAddButton($addButton);      
     });
-    
-
-
 </script>
+
+ 
+

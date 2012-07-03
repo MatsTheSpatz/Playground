@@ -3,3 +3,11 @@
 @helper Script(string scriptName, UrlHelper url) {
         <script src="@url.Content("~/Scripts/" + scriptName)" type="text/javascript"></script>
 }
+
+@helper StyleSheeet(string styleSheetName, UrlHelper url) {
+        <link href="@url.Content("~/Content/" + styleSheetName)" rel="stylesheet" type="text/css" />
+}
+
+@helper Image(string imageName, UrlHelper url) {
+        <img src="@url.Content("~/Content/Images/" + imageName)" />
+}

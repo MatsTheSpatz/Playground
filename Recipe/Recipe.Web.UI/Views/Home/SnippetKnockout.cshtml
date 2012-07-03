@@ -1,0 +1,43 @@
+﻿@{
+    Layout = null;
+}
+
+<ul data-bind="foreach: ingredients">
+    <li>
+        <span data-bind="text: text"></span>
+    </li>
+</ul>
+
+New item:    
+<input data-bind='value: itemToAdd, valueUpdate: "afterkeydown"' />
+<button data-bind="click: addItem">Add</button>    
+
+<script type="text/javascript">
+
+
+    var Ingredient = function (text, type) {
+        this.text = ko.observable(text);
+        this.type = ko.observable(type);
+    };
+
+    var ViewModel = function (initalIngredients) {
+        this.ingredients = ko.observableArray(initalIngredients);
+
+        this.itemToAdd = ko.observable("");
+        this.addItem = function () {
+            if (this.itemToAdd() != "") {
+                this.ingredients.push(new Ingredient(this.itemToAdd(), "rrr"));
+                this.itemToAdd("");
+            }
+        } .bind(this);  // Ensure that "this" is always this view model
+    };
+
+    var initialIngredients = [new Ingredient("A", "B"), new Ingredient("C", "D")];
+    var viewModel = new ViewModel(initialIngredients);
+    ko.applyBindings(viewModel);
+
+    viewModel.ingredients.subscribe(function (value) {
+        alert('changed');
+    });
+
+</script>
