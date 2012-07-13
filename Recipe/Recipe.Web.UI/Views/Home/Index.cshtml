@@ -18,27 +18,25 @@
 
 <b>Hallo</b>
 
-<div id="ingredients">
-
-    <ul id="sortableIngredients">
-        @* add ingredients here*@
-    </ul>
-    
-    <button data-button="true" data-button-icon="add" data-button-action="add">Add</button>
+<div id="ingredientSections">
+    @*
+    <div class="ingredientSection">
+        <ul class="sortableIngredients">
+           
+        </ul>    
+        <button data-button="true" data-button-icon="add" data-button-action="add">Add</button>
+    </div>
+    *@
 </div>
-
-
-@*
-<select><option value="var1">Ingredient</option><option value="var2">Subsection Header</option></select>*@
+<button id="addSectionButton" data-button="true" data-button-icon="add" data-button-action="add">Add Section</button>
 
 
 <script type="text/javascript">
     $(document).ready(function () {
-        var $list = $('ul').first();
-        recipe.lib.init($list, 5);
+        var $div = $('#ingredientSections').first();
+        var $addButton = $('#addSectionButton').first();
 
-        var $addButton = $('button[data-button-action="add"]');
-        recipe.lib.setAddButton($addButton);      
+        recipe.ingredients.init($div, $addButton);
     });
 </script>
 

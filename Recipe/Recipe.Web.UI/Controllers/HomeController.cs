@@ -26,6 +26,11 @@ namespace Recipe.Web.UI.Controllers
             var p = new Person() { FirstName = "Mats", Name = "Bader" };
             return Json(p, JsonRequestBehavior.AllowGet);
         }
+
+        public PartialViewResult SomeData()
+        {
+            return PartialView();
+        }
     }
 
 

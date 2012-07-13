@@ -6,13 +6,14 @@ span.ui-icon {
     float: left;
     margin: 6px 0;
 }
-#sortableIngredients {
+
+.sortableIngredients {
     list-style-type: none;
     margin: 0;
     padding: 0;
     width: 80%;
 }
-#sortableIngredients li {
+.sortableIngredients li {
     background: none repeat scroll 0 0 #FAFAFA;
     border-color: gray;
     border-radius: 6px 6px 6px 6px;
@@ -21,16 +22,26 @@ span.ui-icon {
     margin: 0 0 6px;
     padding: 0.4em 0.4em 0.4em 1.5em;
 }
-#sortableIngredients input {
+.sortableIngredients input {
     background: url("themes/base/images/ui-bg_gloss-wave_60_fece2f_500x100.png") repeat-x scroll 50% 50% #FECE2F;
     border-radius: 5px 5px 5px 5px;
     font-size: 1.5em;
     margin: 1px;
     padding: 5px;
 }
-#sortableIngredients button {
+.sortableIngredients button {
     bottom:  2px;
 }
 
+
+.ingredientSection {
+    list-style-type: none;
+     border-radius: 5px 5px 5px 5px;
+      border-color: black;
+    margin: 12px;
+    padding: 2px;
+    width: 80%;
+    background: none repeat scroll 0 0 #CCCCCC;
+}
 
 input[datalinetype=header] { color: red; }
