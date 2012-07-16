@@ -11,8 +11,12 @@ recipe.ingredients = (function () {
     var sectionData; // lazy-loaded html data of a section
 
     var deleteSection = function ($target) {
-        var $item = $target.parent('.ingredientSection');
-        $item.remove();
+
+          var $item = $target.parent('.ingredientSection');
+//        var $parentDiv = $target.parent('div');
+//        var $item = $('.ingredientSection', $parentDiv);
+//        $target.remove(); // delete button
+        $item.remove(); // content
     };
 
     return {
@@ -42,11 +46,14 @@ recipe.ingredients = (function () {
             }
 
             // add a new section in Html
-            $ingredients.append(sectionData);
+            var $sectionData = $(sectionData);
+
+            $ingredients.append($sectionData);
+
 
             var $ingredientSection = $('.ingredientSection').last();
             var $ingredientList = $('.sortableIngredients', $ingredientSection).first();
-            var $addRowButton = $('.crudButton', $ingredientSection).last();
+            var $addRowButton = $('.addRow', $ingredientSection).first();
 
             if (!$ingredientList.is('ul')) {
                 throw ('initialization failure in init(): list element must be of type <ul>.');
@@ -55,7 +62,7 @@ recipe.ingredients = (function () {
             var s = new IngredientSection($ingredientList, $addRowButton, 4);
 
             // handle delete
-            var $deleteSectionButton = $('.crudButton', $ingredientSection).first();
+            var $deleteSectionButton = $('.deleteSection', $sectionData).first();
             recipe.utilities.convertToJQueryUiButton($deleteSectionButton);
             recipe.utilities.subscribe($deleteSectionButton, deleteSection, this);
         }

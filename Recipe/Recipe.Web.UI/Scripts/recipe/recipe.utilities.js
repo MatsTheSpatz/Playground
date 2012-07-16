@@ -9,8 +9,8 @@ recipe.utilities = (function () {
     var iconMap = new Array();
     iconMap['up'] = 'ui-icon-circle-arrow-n';
     iconMap['down'] = 'ui-icon-circle-arrow-s';
-    iconMap['add'] = 'ui-icon-circle-arrow-s';
-    iconMap['delete'] = 'ui-icon-circle-arrow-s';
+    iconMap['add'] = 'ui-icon-plusthick';
+    iconMap['delete'] = 'ui-icon-circle-close';
 
     function onButtonClicked(event, callback, instance) {
         var $target = $(event.target);
@@ -25,7 +25,11 @@ recipe.utilities = (function () {
                 $button.button();
             } else {
                 var iconName = iconMap[iconType];
-                $button.button({ icons: { primary: iconName} });
+                if ($button.html().length > 1) {
+                    $button.button({ icons: { primary: iconName } });
+                } else {
+                    $button.button({ icons: { primary: iconName }, text: false });                    
+                }
             }
         },
 

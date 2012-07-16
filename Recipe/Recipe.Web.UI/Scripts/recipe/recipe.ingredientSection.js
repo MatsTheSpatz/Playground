@@ -43,7 +43,7 @@ IngredientSection.prototype = function () {
     return {
         init: function (rowCount) {
             // sortable
-            this.getIngredientList().sortable();
+            this.getIngredientList().sortable({ connectWith: ['.sortableIngredients'] });
 
             // convert add button to JQueryUI-button
             var $addButton = this.getAddButton();
@@ -59,8 +59,8 @@ IngredientSection.prototype = function () {
         addRow: function () {
 
             var elements = '<span class="ui-icon ui-icon-arrowthick-2-n-s"></span> \
-                        <input type="text" maxlength="40" size="40" /> \
-                        <button data-button="true" data-button-icon="delete" data-button-action="delete">Delete</button>';
+                        <input class="rowInput" type="text" maxlength="40" /> \
+                        <button class="deleteRow" data-button="true" data-button-icon="delete" data-button-action="delete">A</button>';
 
             var $li = $(document.createElement('li'));
             $li.html(elements);

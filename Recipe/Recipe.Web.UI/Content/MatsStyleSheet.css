@@ -1,7 +1,15 @@
 ﻿
-body {
-    font-size: 10px;
+body 
+{
+    font-size: 10px; 
+    font-family:  Verdana, Arial, Helvetica, sans-serif;
 }
+
+input, select, textarea 
+{
+    font-size:  1.2em;
+}
+
 span.ui-icon {
     float: left;
     margin: 6px 0;
@@ -11,37 +19,70 @@ span.ui-icon {
     list-style-type: none;
     margin: 0;
     padding: 0;
-    width: 80%;
+    width: 450px; 
 }
+
 .sortableIngredients li {
-    background: none repeat scroll 0 0 #FAFAFA;
-    border-color: gray;
-    border-radius: 6px 6px 6px 6px;
-    font-size: 0.9em;
-    height: 28px;
-    margin: 0 0 6px;
-    padding: 0.4em 0.4em 0.4em 1.5em;
+
+    border-color: #e8e8e8;
+    border-radius: 4px 4px 4px 4px;
+
+    margin-left: 12px;
+    padding: 0px;
+    margin-top: 1px;
 }
+
+input.rowInput 
+{
+    margin-top: 2px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    width: 300px;   
+}
+
+button.deleteRow
+{   
+    margin-top: 3px !important;
+    margin-left: 10px;
+   
+}
+
+button.addRow {
+    margin-left: 12px;
+    margin-top: 4px;
+}
+
 .sortableIngredients input {
-    background: url("themes/base/images/ui-bg_gloss-wave_60_fece2f_500x100.png") repeat-x scroll 50% 50% #FECE2F;
-    border-radius: 5px 5px 5px 5px;
-    font-size: 1.5em;
-    margin: 1px;
-    padding: 5px;
+    border-radius: 4px 4px 4px 4px;
+    padding-top: 2px;
+    padding-bottom: 3px;
 }
+
 .sortableIngredients button {
     bottom:  2px;
 }
 
-
-.ingredientSection {
-    list-style-type: none;
-     border-radius: 5px 5px 5px 5px;
-      border-color: black;
-    margin: 12px;
-    padding: 2px;
-    width: 80%;
-    background: none repeat scroll 0 0 #CCCCCC;
+.sectionHeaderInput 
+{
+    font-weight: bold;
+    margin-bottom: 5px;
 }
 
+.ingredientSection {
+    border-radius: 5px;
+    margin: 12px;
+    padding: 5px;
+    width: 460px;
+    background: none repeat scroll 0 0 #eeeeee;
+    position: relative;
+}
+
+
+
+button.deleteSection 
+{
+    position: absolute;
+    left: 478px;
+    top: 0px;
+}
 input[datalinetype=header] { color: red; }
