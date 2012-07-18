@@ -18,21 +18,69 @@
 
 <b>Hallo</b>
 
-<div id="ingredientSections">
-    @*
-    <div class="ingredientSection">
-        <ul class="sortableIngredients">
-           
-        </ul>    
-        <button data-button="true" data-button-icon="add" data-button-action="add">Add</button>
+
+<div id="tabs">
+	<ul>
+        <li><a href="#tabs-1">General<img class="ui-icon ui-icon-check" alt="faf"/></a></li>
+		<li><a href="#tabs-2">Ingredients</a></li>
+		<li><a href="#tabs-3">Instructions</a></li>
+	</ul>
+    <div id="tabs-1">
+        <table>
+            <tr>
+                <td>Recipe Id:</td>
+                <td>1243-E</td>
+            </tr>
+            <tr>
+                <td>Creation date:</td>
+                <td>09-July-2012</td>
+            </tr>
+            <tr>
+                <td>Title:</td>
+                <td><input type="text" maxlength="40" />(*)</td>
+            </tr>
+            <tr>
+                <td>Alternative Title:</td>
+                <td><input type="text" maxlength="40" /></td>
+            </tr>
+            <tr>
+                <td>Tagline/Highlight:</td>
+                <td> <textarea cols="50" rows="4"></textarea></td>
+            </tr>
+        </table>
+ 
+
     </div>
-    *@
+	<div id="tabs-2">
+        <div id="ingredientSections">
+            @*
+            <div class="ingredientSection">
+                <ul class="sortableIngredients">
+           
+                </ul>    
+                <button data-button="true" data-button-icon="add" data-button-action="add">Add</button>
+            </div>
+            *@
+        </div>
+        <button id="addSectionButton" data-button="true" data-button-icon="add" data-button-action="add">Add Section</button>	</div>
+	<div id="tabs-3">
+		<p>Mauris eleifend est et turpis. Duis id erat. Suspendisse potenti. Aliquam vulputate, pede vel vehicula accumsan, mi neque rutrum erat, eu congue orci lorem eget lorem. Vestibulum non ante. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce sodales. Quisque eu urna vel enim commodo pellentesque. Praesent eu risus hendrerit ligula tempus pretium. Curabitur lorem enim, pretium nec, feugiat nec, luctus a, lacus.</p>
+		<p>Duis cursus. Maecenas ligula eros, blandit nec, pharetra at, semper at, magna. Nullam ac lacus. Nulla facilisi. Praesent viverra justo vitae neque. Praesent blandit adipiscing velit. Suspendisse potenti. Donec mattis, pede vel pharetra blandit, magna ligula faucibus eros, id euismod lacus dolor eget odio. Nam scelerisque. Donec non libero sed nulla mattis commodo. Ut sagittis. Donec nisi lectus, feugiat porttitor, tempor ac, tempor vitae, pede. Aenean vehicula velit eu tellus interdum rutrum. Maecenas commodo. Pellentesque nec elit. Fusce in lacus. Vivamus a libero vitae lectus hendrerit hendrerit.</p>
+	</div>
 </div>
-<button id="addSectionButton" data-button="true" data-button-icon="add" data-button-action="add">Add Section</button>
+
+
+
+
+
 
 
 <script type="text/javascript">
     $(document).ready(function () {
+
+        $("#tabs").tabs();
+        $('#saveButton').button({ icons: { primary: 'ui-icon-disk'} });
+
         var $div = $('#ingredientSections').first();
         var $addButton = $('#addSectionButton').first();
 
@@ -42,3 +90,170 @@
 
  
 
+ 
+
+<div class="instruction">
+    <button><</button>
+    <button>></button>
+    <span class="instructionText">Hier ist etwas text.</span>
+</div>
+<div class="instruction">
+    <button><</button>
+    <button>></button>
+    <span class="instructionText">Roger Federer.</span>
+</div>
+
+<br/>
+
+
+
+<script type="text/javascript">
+    
+    function getInstructionItems() {
+        return $('.instruction');
+    }
+    
+    function createInstructionDiv() {
+        var $instructionDiv = $(document.createElement('div'));
+        $instructionDiv.addClass('instruction');
+
+        var $buttonLeft = $(document.createElement('button'));
+        $buttonLeft.html('<');
+
+        var $buttonRight = $(document.createElement('button'));
+        $buttonRight.html('>');
+
+        var $textSpan = createTextSpan();
+
+        $instructionDiv.append($buttonLeft, $buttonRight, $textSpan);
+        return $instructionDiv;
+    }
+
+    function createTextSpan(text) {
+        var $textSpan = $(document.createElement('span'));
+        $textSpan.addClass('instructionText');
+        $textSpan.html(text ? text : '');
+        return $textSpan;
+    }
+
+    function onEnterKeyDownInTextArea($textarea) {
+        // no need to close editor - it will close as part of losing the focus!
+
+        var $thisInstructionDiv = $textarea.parent('div.instruction');
+        var $nextInstructionDiv = $thisInstructionDiv.next('div.instruction');
+
+        if (!$nextInstructionDiv || $nextInstructionDiv.length < 1) {
+            // this was the last instruction.
+            // create a new instruction and open the editor on the new line..
+            $nextInstructionDiv = createInstructionDiv();
+            $nextInstructionDiv.insertAfter($thisInstructionDiv);
+        }
+        
+        openEditor($nextInstructionDiv);
+        
+        //event.cancelBubble = true;
+        //if (event.stopPropagation) event.stopPropagation();
+    }
+
+    function onLostFocusInTextArea($textarea) {
+        var $instructionDiv = $textarea.parent('div.instruction');
+        closeEditor($instructionDiv);
+    }
+
+    function openEditor($instructionDiv) {
+
+        var $textarea = $(document.createElement('textarea'));
+        $textarea.attr("cols", "4");
+        $textarea.attr("rows", "4");
+        $textarea.css("overflow", "hidden");
+        $textarea.css("width", "500px");
+        $textarea.css("height", "70px");
+        $textarea.addClass('instruction');
+
+        var $spanText = $('span', $instructionDiv).first();
+        var currentText = $spanText.html();
+        $textarea.val(currentText);
+
+        // key down
+        $textarea.keydown(function (e) {
+            if (e.keyCode == 13 || e.key == "Enter") { // keycode for chrome
+                onEnterKeyDownInTextArea($(e.target));
+            }
+        });
+        
+         // lose focus
+        $textarea.blur(function (e) {
+            onLostFocusInTextArea($(e.target));
+        });
+
+        // get focus
+        $textarea.focus(function (e) {
+            var $textarea = $(e.target).first();
+            var text = $textarea.val().trim();
+
+            setSelectionRange(e.target, 0, text.length);
+        });
+
+        $spanText.replaceWith($textarea);
+        $textarea.get(0).focus();
+    }
+
+    function closeEditor($instructionDiv) {
+        
+        // read text from open textarea.
+        var $textarea = $('textarea', $instructionDiv).first();
+        var text = $textarea.val(); // don't use html()        
+        text = $.trim(text);
+
+        if (text.length >= 1) {
+            // replace textarea with textspan.
+            var $textSpan = createTextSpan(text);
+            $textarea.replaceWith($textSpan);            
+        } else {
+            // drop this entry
+            $instructionDiv.remove();
+        }
+    }
+
+    function setSelectionRange(element, selectionStart, selectionEnd) {
+        if (element.setSelectionRange) {
+            element.focus();
+            element.setSelectionRange(selectionStart, selectionEnd);
+        }
+        else if (element.createTextRange) {
+            var range = element.createTextRange();
+            range.collapse(true);
+            range.moveEnd('character', selectionEnd);
+            range.moveStart('character', selectionStart);
+            range.select();
+        }
+    }
+
+    function setCaretToPos(element, pos) {
+        setSelectionRange(element, pos, pos);
+    }
+
+    $(document).ready(function () {
+        // Handle click on entire document!
+        // Problem was: 
+        //    When click is made on instrument-text below open textarea,
+        //    the click event is only interpreted after the textarea was closed (blur-event before click-event).
+        //    Hence there is no target for the click anymore.
+        // Workaround:
+        //    mousedown-event fires before blur event. Catch location there.
+        $(document).click(function (e) {
+            if ($(window.lastFocusedElement).hasClass('instructionText')) {
+                var $instructionDiv = $(window.lastFocusedElement).parent('div.instruction');
+                openEditor($instructionDiv);
+            }
+        });
+        $(document).mousedown(function (e) {       
+            window.mouseXPos = e.clientX;
+            window.mouseYPos = e.clientY;
+            window.lastFocusedElement = document.elementFromPoint(window.mouseXPos, window.mouseYPos);
+        });
+
+
+    });
+
+</script>
