@@ -11,6 +11,8 @@ recipe.utilities = (function () {
     iconMap['down'] = 'ui-icon-circle-arrow-s';
     iconMap['add'] = 'ui-icon-plusthick';
     iconMap['delete'] = 'ui-icon-circle-close';
+    iconMap['left'] = 'ui-icon-arrowthick-1-w';
+    iconMap['right'] = 'ui-icon-arrowthick-1-e';
 
     function onButtonClicked(event, callback, instance) {
         var $target = $(event.target);

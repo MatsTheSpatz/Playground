@@ -98,3 +98,16 @@ input[datalinetype=header] { color: red; }
     margin-top: -2px;
    
 }
+/* ======================== */
+
+
+
+
+input.boldFormat, input.italicFormat, input.underlinedFormat {
+    height: 16;
+}
+
+.ui-button-text-only .ui-button-text {
+    padding-top: 0.2em;
+    padding-bottom: 0.2em;
+}

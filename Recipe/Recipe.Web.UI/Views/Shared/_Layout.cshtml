@@ -5,8 +5,9 @@
             @ViewBag.Title
         </title>
 
-        @Content.StyleSheeet("MatsStyleSheet.css", Url)
         @Content.StyleSheeet("themes/ui-lightness/jquery-ui-1.8.21.custom.css", Url)
+        @Content.StyleSheeet("MatsStyleSheet.css", Url)
+        @Content.StyleSheeet("Recipe.Instructions.css", Url)
 
         @Content.Script("jquery/jquery-1.7.2.js", Url)°
         @Content.Script("jquery-ui/jquery-ui-1.8.19.js", Url)
@@ -15,6 +16,7 @@
         @Content.Script("recipe/recipe.utilities.js", Url)
         @Content.Script("recipe/recipe.ingredients.js", Url)
         @Content.Script("recipe/recipe.ingredientSection.js", Url)
+        @Content.Script("recipe/recipe.instructions.js", Url)
     </head>
 
 <body>

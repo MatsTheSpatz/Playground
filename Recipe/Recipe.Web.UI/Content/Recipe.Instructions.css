@@ -1,0 +1,79 @@
+﻿
+/* ---------------------------------------- */
+/*             Instructions
+/* ---------------------------------------- */
+
+#instructions div.instruction {
+    margin-top: 3px;
+    clear: left;
+}
+
+#instructions textarea.instruction {
+    height: 70px;
+    /*overflow: hidden;*/  /*hide the scrollbar*/
+    padding: 3px;
+}
+
+#instructions button.moveLevelLeft, button.moveLevelRight, button.deleteInstruction, button.addInstruction {
+    vertical-align: top;
+    height: 22px;
+}
+
+#instructions button.deleteInstruction {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+#instructions button.addInstruction {
+    margin-top: 10px;    
+}
+
+/* markers */
+#instructions span.marker {
+    float: left;
+    padding: 3px;
+    width: 15px;
+    background-color: #eeeeee;
+}
+
+#instructions span.marker[indentation="level0"] 
+{
+    margin-left: 0px;
+}
+
+#instructions span.marker[indentation="level1"] 
+{
+    margin-left: 10px;
+}
+
+#instructions span.marker[indentation="level2"] 
+{
+    margin-left: 20px;
+}
+
+/* text */
+#instructions span.instructionText 
+{
+    float: left;
+    padding: 3px;
+    border: solid;
+    border-width: 1px;
+    border-color: #dddddd;
+    margin-left: 10px;
+    margin-right: 20px;
+}
+
+#instructions span.instructionText[indentation="level0"] 
+{
+    width: 320px;
+}
+
+#instructions span.instructionText[indentation="level1"] 
+{
+    width: 310px;
+}
+
+#instructions span.instructionText[indentation="level2"] 
+{
+    width: 300px;
+}

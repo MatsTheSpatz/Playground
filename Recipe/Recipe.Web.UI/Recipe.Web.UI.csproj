@@ -72,6 +72,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app_code\Info.txt" />
+    <Content Include="Content\Recipe.Instructions.css" />
     <Content Include="Content\MatsStyleSheet.css" />
     <Content Include="Content\themes\ui-lightness\images\ui-bg_diagonals-thick_18_b81900_40x40.png" />
     <Content Include="Content\themes\ui-lightness\images\ui-bg_diagonals-thick_20_666666_40x40.png" />
@@ -90,6 +91,7 @@
     <Content Include="Content\themes\ui-lightness\jquery-ui-1.8.21.custom.css" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\ComboBoxWidget.js" />
+    <Content Include="Scripts\recipe\recipe.instructions.js" />
     <Content Include="Scripts\recipe\recipe.utilities.js" />
     <Content Include="Scripts\recipe\recipe.ingredients.js" />
     <Content Include="Scripts\recipe\recipe.ingredientSection.js" />
@@ -169,7 +171,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>49582</DevelopmentServerPort>
+          <DevelopmentServerPort>50397</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>
