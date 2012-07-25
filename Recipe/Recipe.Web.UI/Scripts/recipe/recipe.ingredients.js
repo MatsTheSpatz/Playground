@@ -12,10 +12,10 @@ recipe.ingredients = (function () {
 
     var deleteSection = function ($target) {
 
-          var $item = $target.parent('.ingredientSection');
-//        var $parentDiv = $target.parent('div');
-//        var $item = $('.ingredientSection', $parentDiv);
-//        $target.remove(); // delete button
+        var $item = $target.parent('.ingredientSection');
+        //        var $parentDiv = $target.parent('div');
+        //        var $item = $('.ingredientSection', $parentDiv);
+        //        $target.remove(); // delete button
         $item.remove(); // content
     };
 
@@ -55,10 +55,20 @@ recipe.ingredients = (function () {
             var $ingredientList = $('.sortableIngredients', $ingredientSection).first();
             var $addRowButton = $('.addRow', $ingredientSection).first();
 
+            // deal with focus-change on input-field
+            var $sectionHeaderInput = $('.sectionHeaderInput', $ingredientSection);
+            $sectionHeaderInput.focus(function () {
+                $(this).removeClass('dileField').addClass('focusField');
+            });
+            $sectionHeaderInput.blur(function () {
+                $(this).removeClass('focusField').addClass('dileField');
+            });
+
             if (!$ingredientList.is('ul')) {
                 throw ('initialization failure in init(): list element must be of type <ul>.');
             }
 
+            // create new list for this section
             var s = new IngredientSection($ingredientList, $addRowButton, 4);
 
             // handle delete
@@ -66,7 +76,7 @@ recipe.ingredients = (function () {
             recipe.utilities.convertToJQueryUiButton($deleteSectionButton);
             recipe.utilities.subscribe($deleteSectionButton, deleteSection, this);
         }
-       
+
     };
 })();
 

@@ -1,55 +1,52 @@
 ﻿
- input, select, textarea 
-{
-    font-size:  1.2em;
-}
-/*
-span.ui-icon {
-   float: left;
-  display: inline;
-  margin: 6px 0;
-}
-*/
-
-
-
 #ingredientSections .ingredientSection {
-    border-radius: 5px;
-    
+    /* background-image: url(themes/ui-lightness/images/ui-bg_glass_65_ffffff_1x400.png);*/
     border: solid;
-    border-width: 1px;
-    border-color: green;
+    border-width: 2px;   
+    border-radius: 5px;
+    border-top-color: lightgray;
+    border-left-color: lightgray;
+    border-bottom-color: #dddddd;
+    border-right-color: #aaaaaa;
+    box-shadow: 4px 4px 4px #bbbbbb;
     
-   /* margin: 12px;*/
     margin-top: 10px;
-    margin-bottom: 8px;
-    
+    margin-bottom: 10px;    
     padding-left: 10px;
     padding-right: 0px;
     padding-top: 8px;
     padding-bottom: 6px;
-/*    padding: 5px;*/
+
     width: 460px;
-  /*  background: none repeat scroll 0 0 #aaaaaa; */
     position: relative;
 }
 
-#ingredientSections .sectionHeaderInput 
+#ingredientSections input.sectionHeaderInput 
 {
+    font-size:  1.1em;
     font-weight: bold;
-    margin-bottom: 5px;
+    margin-bottom: 4px;
+    
+    margin-top: 0px;
+    padding-left: 5px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    border-radius: 3px 3px 3px 3px;
 }
 
 #ingredientSections .sortableIngredients {
-   /* list-style-type: none;*/
+    /* list-style-type: none;*/
+    margin-top: 2px;
+    margin-bottom: 4px;
     margin-left: 4px;
     padding: 0px;
     width: 450px; 
 }
 
 #ingredientSections .sortableIngredients li {    
-  /*  border-color: #d8D8D8;
-    border-radius: 4px 4px 4px 4px;*/
+    /* border-color: #d8D8D8; */
+    /* border-radius: 4px 4px 4px 4px;*/
+    /* height: 22px;*/
     border: none;
     background: none;    
     
@@ -57,7 +54,6 @@ span.ui-icon {
     margin-top: 0px;
     margin-bottom: 0px;
     padding: 0px;
-   /* height: 22px;*/
 }
 
 #ingredientSections .sortableIngredients button {
@@ -74,12 +70,12 @@ span.ui-icon {
     border-radius: 3px 3px 3px 3px;
 }
 
-#ingredientSections .sortableIngredients input.idleField {
+#ingredientSections input.idleField {
     border: 1px solid #dddddd; 
     background: #eeeeee;
 }
 
-#ingredientSections .sortableIngredients input.focusField {
+#ingredientSections input.focusField {
     border: 1px solid #dddddd; 
     background: white;
 }
@@ -101,16 +97,11 @@ span.ui-icon {
 
 #ingredientSections button.addRow {
     margin-left: 12px;
-    margin-top: 4px;
+    margin-top: 0px;
 }
 
 #ingredientSections button.deleteSection {
     position: absolute;
-    left: 478px;
-    top: 0px;
+    left: 482px;
+    top: -1px;
 }
-
-
-
-
-
