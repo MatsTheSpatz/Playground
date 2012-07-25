@@ -35,9 +35,27 @@ function IngredientSection($listElement, $button, inititalRowCount) {
 IngredientSection.prototype = function () {
 
     // private helper functions
-    var deleteRow = function($target) {
+    var deleteRow = function ($target) {
         var $item = $target.parent('li');
         $item.remove();
+    };
+
+    var isLastRowInSection = function ($row) {
+        var nextRow = getNextRowInSection($row);
+        return (nextRow == undefined);
+    };
+
+    var getNextRowInSection = function ($row) {
+        var $nextRow = $row.next('.ingredient-item');
+        var isLastRow = ($nextRow.length == 0);
+        if (isLastRow) {
+            return undefined;
+        }
+        return $nextRow;
+    };
+
+    var focusRow = function ($row) {
+        $('input.rowInput', $row).focus();
     };
 
     return {
@@ -48,7 +66,7 @@ IngredientSection.prototype = function () {
             // convert add button to JQueryUI-button
             var $addButton = this.getAddButton();
             recipe.utilities.convertToJQueryUiButton($addButton);
-            recipe.utilities.subscribe($addButton, this.addRow, this);
+            recipe.utilities.subscribe($addButton, this.addAndFocusRow, this);
 
             // add rows
             for (var i = 0; i < rowCount; i++) {
@@ -56,11 +74,16 @@ IngredientSection.prototype = function () {
             }
         },
 
+        addAndFocusRow: function () {
+            var $newRow = this.addRow();
+            focusRow($newRow);
+        },
+
         addRow: function () {
 
-            var elements = '<span class="ui-icon ui-icon-arrowthick-2-n-s"></span> \
-                        <input class="rowInput" type="text" maxlength="40" /> \
-                        <button class="deleteRow" data-button="true" data-button-icon="delete" data-button-action="delete">A</button>';
+            var elements = '<input class="rowInput idleField" type="text" maxlength="40" /> \
+                            <span class="dragHelper ui-icon ui-icon-arrowthick-2-n-s"></span> \
+                            <button class="deleteRow" data-button="true" data-button-icon="delete" data-button-action="delete">A</button>';
 
             var $li = $(document.createElement('li'));
             $li.html(elements);
@@ -76,8 +99,41 @@ IngredientSection.prototype = function () {
                 recipe.utilities.convertToJQueryUiButton($(this));
                 recipe.utilities.subscribe($(this), deleteRow, this);
             });
+
+            // deal with focus-change on input-field
+            var $inputField = $('input.rowInput', $li);
+            $inputField.focus(function () {
+                $(this).removeClass('dileField').addClass('focusField');
+            });
+            $inputField.blur(function () {
+                $(this).removeClass('focusField').addClass('dileField');
+            });
+
+            // deal with enter key on input-field
+            var addRowClosure = (function (instance) {
+                return function () {
+                    instance.addRow();
+                };
+            })(this);
+
+            $inputField.keypress(function (e) {
+                if (e.keyCode == 13 || e.key == "Enter") { // keycode for chrome                    
+                    var $currentRow = $(this).parent('.ingredient-item');
+                    var $nextRow;
+                    if (isLastRowInSection($currentRow)) {
+                        e.preventDefault();  // problem with ie: the event is used to trigger a 'delete row'-click.
+                        $nextRow = addRowClosure();
+                    } else {
+                        $nextRow = getNextRowInSection($currentRow);
+                    }
+                    focusRow($nextRow);
+                }
+            });
+
+            // focusRow($li);
+            return $li;
         },
 
         constructor: IngredientSection
     };
-}();
+} ();

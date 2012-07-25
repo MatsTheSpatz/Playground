@@ -1,0 +1,116 @@
+﻿
+ input, select, textarea 
+{
+    font-size:  1.2em;
+}
+/*
+span.ui-icon {
+   float: left;
+  display: inline;
+  margin: 6px 0;
+}
+*/
+
+
+
+#ingredientSections .ingredientSection {
+    border-radius: 5px;
+    
+    border: solid;
+    border-width: 1px;
+    border-color: green;
+    
+   /* margin: 12px;*/
+    margin-top: 10px;
+    margin-bottom: 8px;
+    
+    padding-left: 10px;
+    padding-right: 0px;
+    padding-top: 8px;
+    padding-bottom: 6px;
+/*    padding: 5px;*/
+    width: 460px;
+  /*  background: none repeat scroll 0 0 #aaaaaa; */
+    position: relative;
+}
+
+#ingredientSections .sectionHeaderInput 
+{
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+#ingredientSections .sortableIngredients {
+   /* list-style-type: none;*/
+    margin-left: 4px;
+    padding: 0px;
+    width: 450px; 
+}
+
+#ingredientSections .sortableIngredients li {    
+  /*  border-color: #d8D8D8;
+    border-radius: 4px 4px 4px 4px;*/
+    border: none;
+    background: none;    
+    
+    margin-left: 12px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding: 0px;
+   /* height: 22px;*/
+}
+
+#ingredientSections .sortableIngredients button {
+    bottom:  2px;
+}
+
+#ingredientSections .sortableIngredients input.rowInput {
+    width: 300px;
+    vertical-align: middle;
+    margin-top: 0px;
+    padding-left: 5px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    border-radius: 3px 3px 3px 3px;
+}
+
+#ingredientSections .sortableIngredients input.idleField {
+    border: 1px solid #dddddd; 
+    background: #eeeeee;
+}
+
+#ingredientSections .sortableIngredients input.focusField {
+    border: 1px solid #dddddd; 
+    background: white;
+}
+
+#ingredientSections .sortableIngredients span.dragHelper {
+     display: inline-block;
+     margin-left: 10px;
+     vertical-align: middle;
+}
+
+#ingredientSections button.deleteRow 
+{
+    vertical-align: middle;
+    height: 22px;
+
+    margin-top: 5px !important;
+    margin-left: 10px;   
+}
+
+#ingredientSections button.addRow {
+    margin-left: 12px;
+    margin-top: 4px;
+}
+
+#ingredientSections button.deleteSection {
+    position: absolute;
+    left: 478px;
+    top: 0px;
+}
+
+
+
+
+

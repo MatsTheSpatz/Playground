@@ -72,6 +72,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app_code\Info.txt" />
+    <Content Include="Content\Recipe.Ingredients.css" />
     <Content Include="Content\Recipe.Instructions.css" />
     <Content Include="Content\MatsStyleSheet.css" />
     <Content Include="Content\themes\ui-lightness\images\ui-bg_diagonals-thick_18_b81900_40x40.png" />

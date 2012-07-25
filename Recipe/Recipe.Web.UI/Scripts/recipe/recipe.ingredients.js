@@ -66,6 +66,7 @@ recipe.ingredients = (function () {
             recipe.utilities.convertToJQueryUiButton($deleteSectionButton);
             recipe.utilities.subscribe($deleteSectionButton, deleteSection, this);
         }
+       
     };
 })();
 

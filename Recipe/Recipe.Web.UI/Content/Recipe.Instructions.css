@@ -77,3 +77,106 @@
 {
     width: 300px;
 }
+
+/* ========== Format ===================*/
+/*
+.instructionSeperator {
+    margin-top: 40px;
+    margin-bottom: 10px;
+}
+
+#instructionFormat div.instructionFormat 
+{
+    float: left;
+    padding-top: 6px;
+    padding-left: 5px;
+    padding-bottom: 7px;
+    width: 196px;
+    border:1px solid #cccccc;
+    border-radius: 5px 5px 5px 5px;
+
+    background: #f6f6f6;
+    margin-right: 5px;
+}
+
+div.instructionFormat  span.levelIndicator 
+{
+    line-height: 18px;
+    font-weight: bold;
+    font-size: 1.0em;
+}
+
+div.instructionFormat .ui-button-text-only .ui-button-text
+{
+    padding-left: 0.25em;
+    padding-right: 0.25em;
+    padding-top: 0.1em;
+    padding-bottom: 0.1em;
+}
+
+
+#instructionFormat span.indentationFormat, span.fontStyle, span.fontSize
+{
+    position: relative;
+    left: 0px;
+}
+
+#instructionFormat span.theme 
+{
+    width: 45px;
+    float: left;
+}
+
+#instructionFormat div.themeSection 
+{
+    padding-top: 6px;
+    clear: both;
+}
+*/
+.end {
+    clear: both;
+}
+
+.instructionSeperator {
+    margin-top: 40px;
+    margin-bottom: 10px;
+}
+
+#instructionFormatContainer {
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 10px;    
+} 
+
+#instructionFormat div.instructionFormat 
+{
+    padding-top: 4px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+/*
+div.instructionFormat .ui-button-text-only .ui-button-text
+{
+    padding-left: 0.25em;
+    padding-right: 0.25em;
+    padding-top: 0.1em;
+    padding-bottom: 0.1em;
+}
+*/
+#instructionFormat span.indentationFormat, span.fontStyle, span.fontSize
+{
+    position: relative;
+    left: 0px;
+}
+
+#instructionFormat span.theme 
+{
+    width: 100px;
+    float: left;
+}
+
+#instructionFormat div.themeSection 
+{
+    padding-top: 6px;
+    clear: both;
+}
