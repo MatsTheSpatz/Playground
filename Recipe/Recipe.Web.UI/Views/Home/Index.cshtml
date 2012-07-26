@@ -13,7 +13,7 @@
 
 
 
-
+<button id="saveRecipe">Save Recipe</button>
 
 
 <b>Hallo</b>
@@ -182,25 +182,29 @@
         });
 
         $("#tabs").tabs();
-        $('#saveButton').button({ icons: { primary: 'ui-icon-disk'} });
 
 
         // ingredients
-        var $divIngredients = $('#ingredientSections').first();
-        var $addIngredientSectionButton = $('#addIngredientSection').first();
-
+        var $divIngredients = $('#ingredientSections');
+        var $addIngredientSectionButton = $('#addIngredientSection');
         recipe.ingredients.init($divIngredients, $addIngredientSectionButton);
 
         // instructions
-        //        var $divInstructions = $('#instructionSections').first();
-        //        var $addInstructionSectionButton = $('#addInstructionSection').first();
-
         recipe.instructions.init($('#instructions'));
         recipe.instructions.setLevelFormats(recipe.formats.Number, recipe.formats.Bullet, recipe.formats.None);
 
+        // save!
+        $('#saveRecipe').button({ icons: { primary: 'ui-icon-disk'} });
+
+        $('#saveRecipe').click(function () {
+
+        //    var ingredients = recipe.ingredients.getData();
+            var instructions = recipe.instructions.getData();
 
 
-
+            var t = window.JSON.stringify(instructions);
+            alert(t);
+        });
 
 
 

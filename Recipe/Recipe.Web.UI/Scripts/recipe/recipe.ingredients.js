@@ -69,14 +69,21 @@ recipe.ingredients = (function () {
             }
 
             // create new list for this section
-            var s = new IngredientSection($ingredientList, $addRowButton, 4);
-
+            var list = new IngredientSection($ingredientList, $addRowButton, 4);
+            
             // handle delete
             var $deleteSectionButton = $('.deleteSection', $sectionData).first();
             recipe.utilities.convertToJQueryUiButton($deleteSectionButton);
             recipe.utilities.subscribe($deleteSectionButton, deleteSection, this);
         }
+        /*
+        getData: function () {
+            var ingredientSections = [];
+            $('.ingredientSection', this.$ingredients).each(function () {
 
+            });
+        }
+        */
     };
 })();
 

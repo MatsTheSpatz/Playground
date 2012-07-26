@@ -122,6 +122,8 @@ IngredientSection.prototype = function () {
                     var $nextRow;
                     if (isLastRowInSection($currentRow)) {
                         e.preventDefault();  // problem with ie: the event is used to trigger a 'delete row'-click.
+                        e.stopPropagation();
+
                         $nextRow = addRowClosure();
                     } else {
                         $nextRow = getNextRowInSection($currentRow);

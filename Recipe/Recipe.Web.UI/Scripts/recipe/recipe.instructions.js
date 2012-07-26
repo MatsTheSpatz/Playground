@@ -124,6 +124,22 @@ recipe.instructions = (function () {
         return $buttonDelete;
     }
 
+    function getText($instructionDiv) {
+        var $textSpan = $('.instructionText', $instructionDiv);
+        var text = $textSpan.html();
+        return $.trim(text);
+    }
+
+    function getRowData($instructionDiv) {
+        var level = getIndentationLevel($instructionDiv);
+        var text = getText($instructionDiv);
+
+        if (!text || text.length == 0) {
+            return undefined;
+        }
+        return { 'text': text, 'level': level };
+    }
+
     function getIndentationLevel($instructionDiv) {
         var levelText = $('span.marker', $instructionDiv).attr('indentation');
         var level = levelText.substring(5, 6);
@@ -195,6 +211,10 @@ recipe.instructions = (function () {
         // key down
         $textarea.keydown(function (e) {
             if (e.keyCode == 13 || e.key == "Enter") { // keycode for chrome
+
+                e.preventDefault();  // problem with ie: the event is used to trigger a 'delete row'-click.
+                e.stopPropagation();
+
                 onEnterKeyDownInTextArea($(e.target));
             }
         });
@@ -249,10 +269,6 @@ recipe.instructions = (function () {
             range.moveStart('character', selectionStart);
             range.select();
         }
-    }
-
-    function setCaretToPos(element, pos) {
-        setSelectionRange(element, pos, pos);
     }
 
     function updateMarkers() {
@@ -320,7 +336,7 @@ recipe.instructions = (function () {
                 }
             });
             $(document).mouseup(function () {
-                if (editorWasOpenOnMouseDown && 
+                if (editorWasOpenOnMouseDown &&
                     $(lastFocusedElement).parent('button.addInstruction').length == 1) {
                     addRow();
                 }
@@ -359,6 +375,17 @@ recipe.instructions = (function () {
             this.setLevelFormat(0, level0Format);
             this.setLevelFormat(1, level1Format);
             this.setLevelFormat(2, level2Format);
+        },
+
+        getData: function () {
+            var instructions = [];
+            $('.instruction', this.$enclosingDiv).each(function () {
+                var instruction = getRowData($(this));
+                if (instruction) {
+                    instructions.push(instruction);
+                }
+            });
+            return (instructions.length == 0) ? undefined : instructions;
         }
     };
 })();
