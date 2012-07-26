@@ -92,10 +92,11 @@
     <Content Include="Content\themes\ui-lightness\jquery-ui-1.8.21.custom.css" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\ComboBoxWidget.js" />
+    <Content Include="Scripts\recipe\recipe.ingredients.js" />
     <Content Include="Scripts\recipe\recipe.instructions.js" />
     <Content Include="Scripts\recipe\recipe.utilities.js" />
-    <Content Include="Scripts\recipe\recipe.ingredients.js" />
     <Content Include="Scripts\recipe\recipe.ingredientSection.js" />
+    <Content Include="Scripts\recipe\recipe.ingredientList.js" />
     <Content Include="Scripts\jquery\jquery-1.7.2-vsdoc.js" />
     <Content Include="Scripts\jquery\jquery-1.7.2.js" />
     <Content Include="Scripts\jquery\jquery-1.7.2.min.js" />
