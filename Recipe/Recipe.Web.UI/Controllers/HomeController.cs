@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Dynamic;
+using System.Threading;
 
 namespace Recipe.Web.UI.Controllers
 {
@@ -27,10 +29,15 @@ namespace Recipe.Web.UI.Controllers
             return Json(p, JsonRequestBehavior.AllowGet);
         }
 
-        public PartialViewResult SomeData()
+        public JsonResult SetRecipe()
         {
-            return PartialView();
+            dynamic obj = new ExpandoObject();
+            obj.Value = 10;
+
+            Thread.Sleep(1000);
+            return Json(obj);
         }
+
     }
 
 

@@ -126,6 +126,26 @@ IngredientList.prototype = function () {
             return $li;
         },
 
+        getCount: function () {
+            var $ingredientList = this.getIngredientList();
+            return $('.ingredient-item', $ingredientList).length;
+        },
+        
+        getData: function() {
+            var $ingredientList = this.getIngredientList();
+
+            var ingredientItems = [];
+            $('input.rowInput', $ingredientList).each(function() {
+                var text = $(this).val();
+                var trimmedText = $.trim(text);
+                if (trimmedText.length > 0) {
+                    ingredientItems.push(trimmedText);
+                }
+            });
+
+            return ingredientItems;
+        },
+
         constructor: IngredientList
     };
 } ();

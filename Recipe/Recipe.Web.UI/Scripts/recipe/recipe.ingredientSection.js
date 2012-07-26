@@ -53,15 +53,19 @@ IngredientSection.prototype = function () {
         remove: function () {
             // TODO: does this need any cleanup?
             this.$ingredientSectionDiv.remove();
-        }
-        /*
-        getData: function () {
-        var ingredientSections = [];
-        $('.ingredientSection', this.$ingredients).each(function () {
+        },
 
-        });
-        }        
-        */
+        getData: function () {
+            // header data
+            var $sectionHeaderInput = $('.sectionHeaderInput', this.$ingredientSectionDiv);
+            var text = $sectionHeaderInput.val();
+            var headerText = $.trim(text);
+
+            // ingredients
+            var items = this.ingredientList.getData();
+
+            return { 'sectionHeader': headerText, 'items': items };
+        }
     };
 } ();
 

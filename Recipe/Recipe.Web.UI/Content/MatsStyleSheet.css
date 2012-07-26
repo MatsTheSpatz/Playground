@@ -25,3 +25,37 @@ body
     padding-top: 0.2em;
     padding-bottom: 0.2em;
 }
+
+
+/* =======wait indicator================= */
+
+
+
+
+/* hide the close x on the loading screen */ 
+.progressbar-dialog .ui-dialog-titlebar /*.ui-dialog-titlebar-close*/ { 
+    display: none; 
+} 
+
+.progressbar-dialog .ui-dialog-content 
+{
+    background-color: #eeeeee;
+    margin-left:auto;
+    margin-right:auto;    
+}
+
+.progressbar-dialog .ui-dialog-content img, p 
+{
+    display:block;
+    margin-top: 10px;
+    margin-bottom: 15px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.progressbar-dialog .ui-dialog-content p 
+{
+    margin-top: 15px;
+    text-align: center;
+    font-weight: bold;
+}

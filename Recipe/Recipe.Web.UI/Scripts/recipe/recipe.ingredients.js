@@ -59,6 +59,15 @@ recipe.ingredients = (function () {
             // keep track of all sections
             var sectionInfo = { 'section': section, 'deleteButton': $deleteSectionButton };
             sectionInfos.push(sectionInfo);
+        },
+
+        getData: function () {
+            var sections = [];
+            for (var i = 0; i < sectionInfos.length; i++) {
+                var section = sectionInfos[i].section;
+                sections.push(section.getData());
+            }
+            return sections;
         }
     };
 })();
