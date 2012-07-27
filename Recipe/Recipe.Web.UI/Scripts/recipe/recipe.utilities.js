@@ -28,9 +28,9 @@ recipe.utilities = (function () {
             } else {
                 var iconName = iconMap[iconType];
                 if ($button.html().length > 1) {
-                    $button.button({ icons: { primary: iconName } });
+                    $button.button({ icons: { primary: iconName} });
                 } else {
-                    $button.button({ icons: { primary: iconName }, text: false });                    
+                    $button.button({ icons: { primary: iconName }, text: false });
                 }
             }
         },
@@ -39,6 +39,40 @@ recipe.utilities = (function () {
             $button.click(function (event) {
                 onButtonClicked(event, callback, instance);
             });
+        },
+
+        setCookie: function (name, value, days) {
+            // expires
+            var expires = "";
+            if (days) {
+                var date = new Date();
+                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                expires = "; expires=" + date.toGMTString();
+            }
+
+            // put everything together
+            document.cookie = name + "=" + value + expires + "; path=/";
+        },
+
+        getCookie: function (name) {
+            var nameEQ = name + "=";
+
+            // document.cookie gives back all cookies for this domain and path.
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = cookies[i];
+                while (cookie.charAt(0) == ' ') {
+                    cookie = cookie.substring(1, cookie.length);
+                }
+                if (cookie.indexOf(nameEQ) == 0) {
+                    return cookie.substring(nameEQ.length, cookie.length);
+                }
+            }
+            return null;
+        },
+
+        eraseCookie: function (name) {
+            setCookie(name, "", -1);  // expire yesterday.
         }
     };
 })();

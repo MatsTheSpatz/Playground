@@ -8,7 +8,8 @@ recipe.save = (function () {
 
     var saveInProgressDialogSelector = '#saveInProgress-dialog';
     var saveSucceededDialogSelector = '#saveSucceeded-dialog';
-
+    var saveFailedDialogSelector = '#saveFailed-dialog';
+    var recipeAsTextSelector = '#recipeAsText-dialog';
 
     function initSaveInProgressDialog() {
         $(saveInProgressDialogSelector).dialog({
@@ -53,18 +54,91 @@ recipe.save = (function () {
         $(saveSucceededDialogSelector).dialog('close');
     }
 
-    function postData(jsonText) {
+    function initSaveFailedDialog() {
+        $(saveFailedDialogSelector).dialog({
+            height: 300,
+            minHeight: 200,
+            maxHeight: 400,
+            width: 460,
+            minWidth: 400,
+            maxWidth: 600,
+            modal: true,
+            title: 'Failure',
+            buttons: [
+                { text: 'Try saving again now', click: onTrySaveAgain },
+                { text: 'Store as cookie', click: onStoreCookie },
+                { text: 'Show as text', click: onSaveText },
+                { text: 'Cancel', click: onCancelSave}],
+            dialogClass: 'normal-dialog',
+            autoOpen: false
+        });
+    }
+
+    function openSaveFailedDialog() {
+        $(saveFailedDialogSelector).dialog('open');
+    }
+
+    function closeSaveFailedDialog() {
+        $(saveFailedDialogSelector).dialog('close');
+    }
+
+    function initRecipeAsTextDialog() {
+        $(recipeAsTextSelector).dialog({
+            height: 520,
+            minHeight: 260,
+            maxHeight: 800,
+            width: 450,
+            minWidth: 300,
+            maxWidth: 1000,
+            modal: true,
+            title: 'Recipe',
+            buttons: [{ text: 'Close', click: function () { closeRecipeAsTextDialog(); } }],
+            dialogClass: 'normal-dialog',
+            autoOpen: false
+        });
+    }
+
+    function openRecipeAsTextDialog() {
+        var text = getData();
+        $('textarea', $(recipeAsTextSelector)).val(text);
+
+        $(recipeAsTextSelector).dialog('open');
+    }
+
+    function closeRecipeAsTextDialog() {
+        $(recipeAsTextSelector).dialog('close');
+    }
+
+    function postDataToServer(jsonText) {
 
         openSaveInProgressDialog();
 
-        var jqxhr = $.post("/Home/SetRecipe", jsonText)
-            .success(function () {
+        var jqxhr = $.ajax({
+            type: "POST",
+            url: "/Home/SetRecipe",
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            data: jsonText
+        })
+            .success(function() {
                 closeSaveInProgressDialog();
                 openSaveSucceededDialog();
             })
-            .error(function () {
+            .error(function(xhr, ajaxOptions, thrownError) {
                 closeSaveInProgressDialog();
-                alert('oops');
+
+                var text;
+                if (xhr.status >= 500) {
+                    text = "The server produced an error or is overloaded.";
+                } else if (xhr.status >= 400) {
+                    text = "Network/Client problem: the server was not reached.";
+                } else {
+                    text = "Unexpected error.";
+                }
+                text += ' [Status-code:' + xhr.status + ']';
+
+                $('p.save-failure-reason').html(text);
+                openSaveFailedDialog();
             });
     }
 
@@ -77,25 +151,52 @@ recipe.save = (function () {
         alert("NAVIGATE AWAY!");
     }
 
+    function onTrySaveAgain() {
+        closeSaveFailedDialog();
+        postDataToServer(getData());
+    }
+
+    function onStoreCookie() {
+        closeSaveFailedDialog();
+
+        var jsonText = getData();
+        recipe.utilities.setCookie("recipeXYZ", jsonText, 30);
+    }
+
+    function onSaveText() {
+        closeSaveFailedDialog();
+
+        openRecipeAsTextDialog();
+    }
+
+    function onCancelSave() {
+        closeSaveFailedDialog();
+    }
+
+    function getData() {
+        var data = {
+            'ingredients': recipe.ingredients.getData(),
+            'instructions': recipe.instructions.getData()
+        };
+
+        var jsonText = window.JSON.stringify(data);
+        return jsonText;
+    }
+
+
     return {
-        init: function ($saveButton) {
+        init: function ($saveButton, $showRecipeAsTextButton) {
 
-            $saveButton.button({ icons: { primary: 'ui-icon-disk'} });
-            $saveButton.click(function () {
+            $saveButton.button({ icons: { primary: 'ui-icon-transferthick-e-w'} });
+            $saveButton.click(function () { postDataToServer(getData()); });
 
-                // collect data
-                var data = {
-                    'ingredients': recipe.ingredients.getData(),
-                    'instructions': recipe.instructions.getData()
-                };
-
-                // post to server
-                var jsonText = window.JSON.stringify(data);
-                postData(jsonText);
-            });
+            $showRecipeAsTextButton.button({ icons: { primary: 'ui-icon-document'} });
+            $showRecipeAsTextButton.click(function () { openRecipeAsTextDialog(); });
 
             initSaveInProgressDialog();
             initSaveSucceededDialog();
+            initSaveFailedDialog();
+            initRecipeAsTextDialog();
         }
     };
 })();

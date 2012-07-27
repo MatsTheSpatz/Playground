@@ -59,3 +59,16 @@ body
     text-align: center;
     font-weight: bold;
 }
+
+.normal-dialog .ui-dialog-content textarea {
+    border:1px solid #999999; 
+    width:100%; 
+    margin:5px 0; 
+    padding:3px;
+    overflow: auto;
+}
+
+.normal-dialog .ui-dialog-content li {
+
+    padding: 4px;
+}
