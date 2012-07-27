@@ -120,11 +120,11 @@ recipe.save = (function () {
             contentType: 'application/json; charset=utf-8',
             data: jsonText
         })
-            .success(function() {
+            .success(function () {
                 closeSaveInProgressDialog();
                 openSaveSucceededDialog();
             })
-            .error(function(xhr, ajaxOptions, thrownError) {
+            .error(function (xhr, ajaxOptions, thrownError) {
                 closeSaveInProgressDialog();
 
                 var text;
@@ -174,10 +174,10 @@ recipe.save = (function () {
     }
 
     function getData() {
-        var data = {
-            'ingredients': recipe.ingredients.getData(),
-            'instructions': recipe.instructions.getData()
-        };
+        
+        var data = recipe.general.getData();
+        data.ingredients = recipe.ingredients.getData();
+        data.instructions = recipe.instructions.getData();
 
         var jsonText = window.JSON.stringify(data);
         return jsonText;
