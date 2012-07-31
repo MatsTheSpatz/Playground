@@ -25,11 +25,16 @@ namespace Recipe.Web.UI.Controllers
 
         public ActionResult RecipeEditor(int recipeId)
         {
-            var recipe = _repository.GetRecipe(recipeId);
-         
+            Recipe recipe = null;
+            if (recipeId > 0)
+            {
+                recipe = _repository.GetRecipe(recipeId);
+            }
+
             // ViewBag is a dynamic object
             ViewBag.Message = "Edit Recipe " + recipeId;
             ViewBag.Recipe = recipe;
+
             return View();
         }
 
@@ -42,7 +47,6 @@ namespace Recipe.Web.UI.Controllers
         public JsonResult SetRecipe(Recipe recipe)
         {            
             _repository.SetRecipe(recipe);
-
 
             Thread.Sleep(1000);
             //  throw new ArgumentException("Bad things happended");

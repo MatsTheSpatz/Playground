@@ -33,9 +33,6 @@ recipe.ingredients = (function () {
             // convert add-button to jquery UI button
             recipe.utilities.convertToJQueryUiButton($addSectionButton);
             recipe.utilities.subscribe($addSectionButton, this.addSection);
-
-            // add first section
-            this.addSection();
         },
 
         addSection: function () {
@@ -59,15 +56,33 @@ recipe.ingredients = (function () {
             // keep track of all sections
             var sectionInfo = { 'section': section, 'deleteButton': $deleteSectionButton };
             sectionInfos.push(sectionInfo);
+
+            return section;
         },
 
         getData: function () {
             var sections = [];
             for (var i = 0; i < sectionInfos.length; i++) {
                 var section = sectionInfos[i].section;
-                sections.push(section.getData());
+                var sectionData = section.getData();
+                if (sectionData) {
+                    sections.push(sectionData);
+                }
             }
             return sections;
+        },
+
+        setData: function (sections) {
+            if (sections && sections.length >= 1) {
+                for (var i = 0; i < sections.length; i++) {
+                    var section = this.addSection();
+                    section.setData(sections[i]);
+                }
+            } else {
+                // add first section
+                var section = this.addSection();
+                section.setData();
+            }
         }
     };
 })();

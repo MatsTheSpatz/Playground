@@ -23,8 +23,8 @@ namespace Recipe.Web.UI.Controllers
     {
         public string SectionHeader { get; set; }
 
-        [XmlArrayAttribute("Ingredients")]
-        public string[] Items;
+//        [XmlArrayAttribute("Ingredients")]
+        public string[] Items { get; set; }
     }
 
     [Serializable]

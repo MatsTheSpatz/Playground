@@ -53,7 +53,7 @@ IngredientList.prototype = function () {
     };
 
     return {
-        init: function (rowCount) {
+        init: function () {
             // sortable
             this.getIngredientList().sortable({ connectWith: ['.sortableIngredients'] });
 
@@ -61,11 +61,6 @@ IngredientList.prototype = function () {
             var $addRowButton = this.getAddButton();
             recipe.utilities.convertToJQueryUiButton($addRowButton);
             recipe.utilities.subscribe($addRowButton, this.addAndFocusRow, this);
-
-            // add rows
-            for (var i = 0; i < rowCount; i++) {
-                this.addRow();
-            }
         },
 
         addAndFocusRow: function () {
@@ -73,9 +68,9 @@ IngredientList.prototype = function () {
             focusRow($newRow);
         },
 
-        addRow: function () {
+        addRow: function (text) {
 
-            var elements = '<input class="rowInput idleField" type="text" maxlength="40" /> \
+            var elements = '<input class="rowInput idleField" type="text" maxlength="40" placeholder="Ingredient" /> \
                             <span class="dragHelper ui-icon ui-icon-arrowthick-2-n-s"></span> \
                             <button class="deleteRow" data-button-icon="delete" data-button-action="delete">A</button>';
 
@@ -92,8 +87,12 @@ IngredientList.prototype = function () {
             recipe.utilities.convertToJQueryUiButton($deleteRowButton);
             recipe.utilities.subscribe($deleteRowButton, deleteRow, this);
 
-            // deal with focus-change on input-field
+            // initial text
             var $inputField = $('input.rowInput', $li);
+            if (text && text.length > 0) {
+                $inputField.val(text);
+            }
+            // deal with focus-change on input-field
             $inputField.focus(function () {
                 $(this).removeClass('dileField').addClass('focusField');
             });
@@ -130,12 +129,12 @@ IngredientList.prototype = function () {
             var $ingredientList = this.getIngredientList();
             return $('.ingredient-item', $ingredientList).length;
         },
-        
-        getData: function() {
+
+        getData: function () {
             var $ingredientList = this.getIngredientList();
 
             var ingredientItems = [];
-            $('input.rowInput', $ingredientList).each(function() {
+            $('input.rowInput', $ingredientList).each(function () {
                 var text = $(this).val();
                 var trimmedText = $.trim(text);
                 if (trimmedText.length > 0) {
@@ -144,6 +143,19 @@ IngredientList.prototype = function () {
             });
 
             return ingredientItems;
+        },
+
+        setData: function (ingredientItems) {
+            if (ingredientItems && ingredientItems.length >= 1) {
+                for (var i = 0; i < ingredientItems.length; i++) {
+                    this.addRow(ingredientItems[i]);
+                }
+            } else {
+                // add 3 empty rows
+                for (var i = 0; i < 3; i++) {
+                    this.addRow();
+                }
+            }
         },
 
         constructor: IngredientList

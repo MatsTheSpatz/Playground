@@ -97,7 +97,7 @@
     <Content Include="Global.asax" />
     <Content Include="Scripts\ComboBoxWidget.js" />
     <Content Include="Scripts\recipe\recipe.general.js" />
-    <Content Include="Scripts\recipe\recipe.save.js" />
+    <Content Include="Scripts\recipe\recipe.persistence.js" />
     <Content Include="Scripts\recipe\recipe.ingredients.js" />
     <Content Include="Scripts\recipe\recipe.instructions.js" />
     <Content Include="Scripts\recipe\recipe.utilities.js" />

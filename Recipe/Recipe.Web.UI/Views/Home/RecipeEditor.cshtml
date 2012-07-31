@@ -180,15 +180,6 @@
 
 <script type="text/javascript">
     
-    @if(ViewBag.Recipe != null)
-    {
-        @:var rItem = @Html.Raw(Json.Encode(ViewBag.Recipe));
-    }
-    else
-    {
-        @:rItem = undefined;
-    }
-
     $(document).ready(function () {
 
         $("#instructionFormat").accordion({  // activate accordions before tabs!
@@ -214,13 +205,19 @@
         // prepare saving
         var $saveButton = $('#saveRecipe');
         var $showRecipeAsTextButton = $('#showRecipeAsText');
-        recipe.save.init($saveButton, $showRecipeAsTextButton);
-      
-      
+        recipe.persistence.init($saveButton, $showRecipeAsTextButton);
+
 
         // INIT
-        if (rItem) {
-            recipe.general.setData(rItem);
+        @if(ViewBag.Recipe != null)
+        {
+            @:var jsonText = '@Html.Raw(Json.Encode(ViewBag.Recipe)) ';
+            @:var data = jQuery.parseJSON(jsonText);
+            @:recipe.persistence.setData(data);
+        }
+        else
+        {
+            @:recipe.persistence.setData(undefined);
         }
 
 

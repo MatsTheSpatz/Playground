@@ -25,20 +25,27 @@ recipe.instructions = (function () {
         $addButton.attr("data-button-icon", "add");
 
         $addButton.click(function () {
-            addRow();
+            var $newInstructionDiv = addRow();
+            openEditor($newInstructionDiv);
         });
 
         recipe.utilities.convertToJQueryUiButton($addButton);
         return $addButton;
     }
 
-    function addRow() {
+    function addRow(text, level) {
+        var $newInstructionDiv = createInstructionDiv(text, level);
+
+        // insert after last existing instruction (if there is one...)
         var $lastInstructionDiv = $('div.instruction', $enclosingDiv).last();
-        var $newInstructionDiv = createInstructionDiv("", 0);
-        $lastInstructionDiv.after($newInstructionDiv);
+        if ($lastInstructionDiv.length == 0) {
+            $enclosingDiv.prepend($newInstructionDiv);  // first one!
+        } else {
+            $lastInstructionDiv.after($newInstructionDiv);
+        }
 
         updateMarkers();
-        openEditor($newInstructionDiv);
+        return $newInstructionDiv;
     }
 
     function createInstructionDiv(text, level) {
@@ -71,6 +78,7 @@ recipe.instructions = (function () {
         var $textSpan = $(document.createElement('span'));
         $textSpan.addClass('instructionText');
         $textSpan.html(text ? text : '');
+        
         return $textSpan;
     }
 
@@ -137,7 +145,7 @@ recipe.instructions = (function () {
         if (!text || text.length == 0) {
             return undefined;
         }
-        return { 'text': text, 'level': level };
+        return { 'Text': text, 'Level': level };
     }
 
     function getIndentationLevel($instructionDiv) {
@@ -315,11 +323,6 @@ recipe.instructions = (function () {
         init: function ($instructionsDiv) {
 
             $enclosingDiv = $instructionsDiv;
-
-            var $div1 = createInstructionDiv("Hier kommt dann mal der Text", 0);
-            var $div2 = createInstructionDiv("Hier kommt Roger Federer", 0);
-
-            $enclosingDiv.append($div1, $div2);
             $enclosingDiv.append(createAddInstructionButton());
 
             // Handle click on entire document!
@@ -338,7 +341,8 @@ recipe.instructions = (function () {
             $(document).mouseup(function () {
                 if (editorWasOpenOnMouseDown &&
                     $(lastFocusedElement).parent('button.addInstruction').length == 1) {
-                    addRow();
+                    var $newInstructionDiv = addRow();
+                    openEditor($newInstructionDiv);
                 }
             });
             $(document).mousedown(function (e) {
@@ -386,6 +390,21 @@ recipe.instructions = (function () {
                 }
             });
             return (instructions.length == 0) ? undefined : instructions;
+        },
+
+        setData: function (instructions) {
+            if (instructions && instructions.length >= 1) {
+                // fill in existing data
+                for (var i = 0; i < instructions.length; i++) {
+                    var rowData = instructions[i];
+                    addRow(rowData.Text, rowData.Level);
+                }
+            } else {
+                // add two empty instruction fields
+                for (var i = 0; i < 2; i++) {
+                    addRow('', 0);
+                }
+            }
         }
     };
 })();

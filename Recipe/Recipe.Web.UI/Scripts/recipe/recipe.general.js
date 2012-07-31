@@ -37,8 +37,19 @@ recipe.general = (function () {
         },
 
         setData: function (obj) {
-            setRecipeId(obj['Id']);
-            setRecipeName(obj['Name']);
+            var id = (obj && 'Id' in obj) ? obj['Id'] : '-';
+            setRecipeId(id);
+
+            var name = (obj && 'Name' in obj) ? obj['Name'] : '';
+            setRecipeName(name);
+            
+//            if (obj) {
+//                if ('Id' in obj)
+//                    setRecipeId(obj['Id']);
+
+//                if ('Name' in obj)
+//                    setRecipeName(obj['Name']);
+//            }
         }
     };
 })();

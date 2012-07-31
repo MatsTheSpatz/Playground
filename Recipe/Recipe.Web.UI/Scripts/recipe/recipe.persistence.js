@@ -4,7 +4,7 @@ if (typeof recipe == 'undefined') {
     recipe = {};
 }
 
-recipe.save = (function () {
+recipe.persistence = (function () {
 
     var saveInProgressDialogSelector = '#saveInProgress-dialog';
     var saveSucceededDialogSelector = '#saveSucceeded-dialog';
@@ -174,10 +174,10 @@ recipe.save = (function () {
     }
 
     function getData() {
-        
+
         var data = recipe.general.getData();
-        data.ingredients = recipe.ingredients.getData();
-        data.instructions = recipe.instructions.getData();
+        data['Ingredients'] = recipe.ingredients.getData();
+        data['Instructions'] = recipe.instructions.getData();
 
         var jsonText = window.JSON.stringify(data);
         return jsonText;
@@ -197,7 +197,16 @@ recipe.save = (function () {
             initSaveSucceededDialog();
             initSaveFailedDialog();
             initRecipeAsTextDialog();
+        },
+
+        setData: function (data) {
+            recipe.general.setData(data);
+
+            recipe.ingredients.setData(data ? data['Ingredients'] : undefined);
+            recipe.instructions.setData(data ? data['Instructions'] : undefined);
         }
+
+
     };
 })();
 

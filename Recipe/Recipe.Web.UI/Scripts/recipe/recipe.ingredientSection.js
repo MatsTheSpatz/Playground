@@ -17,7 +17,7 @@ IngredientSection.prototype = function () {
 
     var sectionData = '\
       <div class="ingredientSection"> \
-        <input class="sectionHeaderInput idleField" type="text" maxlength="40" size="40" />(Section Header) \
+        <input class="sectionHeaderInput idleField" type="text" maxlength="40" size="40" placeholder="Section Header" />(Section Header) \
         <ul class="sortableIngredients"> \
         </ul> \
         <button class="addRow" data-button-icon="add">Add Row</button> \
@@ -44,7 +44,7 @@ IngredientSection.prototype = function () {
             var $ingredientList = $('.sortableIngredients', $ingredientSection);
             var $addRowButton = $('.addRow', $ingredientSection);
 
-            var list = new IngredientList($ingredientList, $addRowButton, 4);
+            var list = new IngredientList($ingredientList, $addRowButton);
 
             this.ingredientList = list;
             this.$ingredientSectionDiv = $ingredientSection;
@@ -64,7 +64,23 @@ IngredientSection.prototype = function () {
             // ingredients
             var items = this.ingredientList.getData();
 
-            return { 'sectionHeader': headerText, 'items': items };
+            // header or text must exist to be valid!
+            if (headerText.length == 0 && items.length == 0) {
+                return undefined;
+            }
+
+            return { 'SectionHeader': headerText, 'Items': items };
+        },
+
+        setData: function (section) {
+            // header data
+            var $sectionHeaderInput = $('.sectionHeaderInput', this.$ingredientSectionDiv);
+            var header = (section && ['SectionHeader'] in section) ? section['SectionHeader'] : '';
+            $sectionHeaderInput.val(header);
+
+            // ingredients
+            var items = (section && 'Items' in section) ? section['Items'] : undefined;
+            this.ingredientList.setData(items);
         }
     };
 } ();
