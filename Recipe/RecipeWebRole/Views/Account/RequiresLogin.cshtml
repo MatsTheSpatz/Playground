@@ -1,0 +1,10 @@
+﻿<div>
+    <p>
+        Für die von Dir angeforderte Seite musst Du angemeldet sein.         
+    </p>
+        
+    @Html.ActionLink("Login", "Login", "Account", new { returnUrl = ViewBag.ReturnUrl }, null)  
+    or 
+    @Html.ActionLink("Register", "Register", "Account", new { returnUrl = ViewBag.ReturnUrl }, null)
+
+</div>

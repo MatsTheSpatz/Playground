@@ -73,7 +73,6 @@ namespace RecipeWebRole
         /// </summary>
         void WSFederationAuthenticationModule_RedirectingToIdentityProvider(object sender, RedirectingToIdentityProviderEventArgs e)
         {
-            System.Diagnostics.Debug.WriteLine("WSFederationAuthenticationModule_RedirectingToIdentityProvider");
         }
     }
 }

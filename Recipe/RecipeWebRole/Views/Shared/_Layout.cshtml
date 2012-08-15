@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.IdentityModel.Claims
+<!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="utf-8" />
@@ -11,7 +12,33 @@
     </head>
     <body>
         <header>
+            
             <h1>Mats' Recipe App</h1>
+            
+            <div id="quicksearch">
+                <form>
+                    <input type="text" maxlength="20" />
+                    <input type="submit" value="Search" />
+                </form>
+            </div>
+
+            <div id="navigation">
+                @Html.ActionLink("Alle Rezepte", "Index", "Home")  ¦          
+                @Html.ActionLink("Nach Rezept suchen", "SearchRecipe", "Home")  ¦          
+                @Html.ActionLink("Rezept erstellen", "CreateRecipe", "Home")  ¦            
+                @Html.ActionLink("Profil bearbeiten", "UserProfile", "Home")                
+            </div>
+
+            <div id="user">
+                @if (Request.IsAuthenticated) {
+                    <text>Hallo @((User.Identity as IClaimsIdentity).Label) ¦ </text>
+                    @Html.ActionLink("Logout", "LogOff", "Account")
+                } else {
+                    @Html.ActionLink("Login", "Login", "Account", new { returnUrl = Request.Url.LocalPath }, null)     <text>¦</text>                          
+                    @Html.ActionLink("Register", "Register", "Account", new { returnUrl = Request.Url.LocalPath }, null)                    
+                }     
+            </div>
+
         </header>
         <div id="body">
             <section class="content-wrapper main-content clear-fix">
@@ -21,7 +48,7 @@
         <footer>
             <div class="content-wrapper">
                 <div class="float-left">
-                    <p>&copy; @DateTime.Now.Year</p>
+                    <p>&copy; @DateTime.Now.Year Mats Bader</p>
                 </div>
             </div>
         </footer>

@@ -17,20 +17,10 @@ namespace RecipeWebRole.Controllers
     {
         //
         // GET: /Account/Login
-
+        // Without view -> use WSFederationAuthenticationModule to redirect to Azure ACS
+        
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
-        {
-            ViewBag.ReturnUrl = returnUrl;
-            return View();
-        }
-
-
-        //
-        // GET: /Account/Authenticate
-
-        [AllowAnonymous]
-        public ActionResult Authenticate(string returnUrl)
         {
             if (!User.Identity.IsAuthenticated)
             {
@@ -56,6 +46,30 @@ namespace RecipeWebRole.Controllers
             // Redirect back to the page the user was querying.
             return new RedirectResult(returnUrl);
         }
+
+        //
+        // GET: /Account/RequiresLogin
+
+        [HttpGet]
+        [AllowAnonymous]
+        public ActionResult RequiresLogin(string returnUrl)
+        {
+            ViewBag.ReturnUrl = returnUrl;
+            return View();
+        }
+
+
+        //
+        // GET: /Account/Register
+
+        [HttpGet]
+        [AllowAnonymous]
+        public ActionResult Register(string returnUrl)
+        {
+            ViewBag.ReturnUrl = returnUrl;
+            return View();
+        }
+
 
 
         //

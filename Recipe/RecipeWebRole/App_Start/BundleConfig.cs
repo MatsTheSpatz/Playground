@@ -34,6 +34,7 @@ namespace RecipeWebRole
         {
             bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(
                 "~/Content/MatsStyleSheet.css",
+                "~/Content/Header.css",
                 "~/Content/themes/ui-lightness/jquery-ui-1.8.21.custom.css"));
 
             bundles.Add(new StyleBundle("~/Content/recipeEditor").Include(

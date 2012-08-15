@@ -10,7 +10,7 @@ using RecipeWebRole.Models;
 
 namespace RecipeWebRole.DataAccess
 {
-    public class BlobStorageRecipeRepository : IRecipeRepository
+    public class FakeInMemoryRecipeRepository : IRecipeRepository
     {
         private const string BlobContainer = "recipecontainer";  // must be lowercase!!!
 

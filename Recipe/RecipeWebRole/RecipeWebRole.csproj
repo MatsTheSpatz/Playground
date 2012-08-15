@@ -140,8 +140,9 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Content Include="app_code\Content.cshtml" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="DataAccess\IRecipeRepository.cs" />
     <Compile Include="DataAccess\BlobStorageRecipeRepository.cs" />
+    <Compile Include="DataAccess\IRecipeRepository.cs" />
+    <Compile Include="DataAccess\InMemoryRecipeRepository.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="DataAccess\IUserRepository.cs" />
     <Compile Include="Models\User.cs" />
@@ -160,7 +161,7 @@
     <Content Include="Content\MatsStyleSheet.css" />
     <Content Include="Content\Recipe.Ingredients.css" />
     <Content Include="Content\Recipe.Instructions.css" />
-    <Content Include="Content\Site.css" />
+    <Content Include="Content\Header.css" />
     <Content Include="Content\themes\ui-lightness\images\ui-bg_diagonals-thick_18_b81900_40x40.png" />
     <Content Include="Content\themes\ui-lightness\images\ui-bg_diagonals-thick_20_666666_40x40.png" />
     <Content Include="Content\themes\ui-lightness\images\ui-bg_flat_10_000000_40x100.png" />
@@ -202,10 +203,14 @@
     <Content Include="Scripts\recipe\recipe.utilities.js" />
     <None Include="Scripts\snippets\ingredientsInTablejs.js" />
     <Content Include="Views\Home\Inhouse.cshtml" />
-    <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\UserData.cshtml" />
     <Content Include="Views\Home\RecipeEditor.cshtml" />
     <Content Include="Views\Snippets\SnippetKnockout.cshtml" />
+    <Content Include="Views\Home\SearchRecipe.cshtml" />
+    <Content Include="Views\Home\CreateRecipe.cshtml" />
+    <Content Include="Views\Home\UserProfile.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Account\RequiresLogin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="favicon.ico" />

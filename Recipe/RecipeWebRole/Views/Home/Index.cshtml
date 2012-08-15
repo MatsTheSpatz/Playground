@@ -1,4 +1,4 @@
-﻿@model IEnumerable<int>
+﻿@model IEnumerable<Tuple<int,string>>
 @{
     ViewBag.Title = "Start Page";
 }
@@ -8,23 +8,15 @@
 
 <div>
     <ul id="recipeList">
-        @foreach  (var id in @Model)
+        @foreach  (var recipe in @Model)
         {
-            <li id="recipe@(id)"><a href="/Home/RecipeEditor?recipeId=@(id)">@id</a></li>
+            <li>                
+                @Html.ActionLink("ID" + recipe.Item1, "RecipeEditor", "Home", new { recipeId = recipe.Item1 }, null)
+                @(recipe.Item2)
+            </li>
         }
     </ul>
-    <a href="/Home/RecipeEditor?recipeId=-1">New recipe...</a></>
 </div>
-
-<div>
-    <h1>Index</h1>
-    @Html.ActionLink("Hier geht's Inhouse", @"Inhouse")
-</div>
-
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
 
 
 

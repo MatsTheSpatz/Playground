@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading;
 using System.Web.Mvc;
@@ -11,24 +12,64 @@ using RecipeWebRole.Utilities;
 
 namespace RecipeWebRole.Controllers
 {
+    [ActionFilters.Authorize]
     public class HomeController : Controller
     {
-        private static readonly IRecipeRepository _repo = new BlobStorageRecipeRepository();
+        private static readonly IRecipeRepository _repo = new InMemoryRecipeRepository();//new FakeInMemoryRecipeRepository();
         //private static readonly LocalFileSystemRecipeRepository _repo = LocalFileSystemRecipeRepository.Instance;
 
+        //
+        // GET: /Home/Index
+
+        [HttpGet]
+        [AllowAnonymous]
         public ActionResult Index()
         {
-            bool isInRole = User.IsInRole("Family");
-            System.Diagnostics.Debug.WriteLine(isInRole);
-
-            ViewBag.Message = "Recipe List";
-            IEnumerable<int> data = new List<int>() {1, 2, 3};
-            //IEnumerable<int> data = _repo.GetRecipeIds();
-
+            IList<int> ids = _repo.GetRecipeIds();
+            IEnumerable<Tuple<int, string>> data = (from id in ids
+                                                    let name = _repo.GetRecipe(id).Name
+                                                    select new Tuple<int, string>(id, name)).ToList();
             return View(data);
         }
 
-        [ActionFilters.Authorize]
+
+        //
+        // GET: /Home/Index
+
+        [HttpGet]
+        [AllowAnonymous]
+        public ActionResult SearchRecipe()
+        {
+            return View();
+        }
+
+
+        //
+        // GET: /Home/CreateRecipe
+
+        [HttpGet]
+        [AllowAnonymous]
+        public ActionResult CreateRecipe()
+        {
+            return View();
+        }
+
+
+        //
+        // GET: /Home/UserProfile
+
+        [HttpGet]
+        [AllowAnonymous]
+        public ActionResult UserProfile()
+        {
+            return View();
+        }
+
+
+
+
+
+
         public ActionResult RecipeEditor(int recipeId)
         {
             Recipe recipe = null;
