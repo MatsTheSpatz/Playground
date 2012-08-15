@@ -1,0 +1,29 @@
+﻿@model dynamic
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>title</title>
+    </head>
+    <body>
+        <div>
+            <h2>User registration</h2>
+            
+            You are new to this website.
+            <br/>
+            Please provide a user name.
+            
+            @using (Html.BeginForm("UserData", "Account", new { returnUrl = ViewBag.ReturnUrl }, FormMethod.Post))
+            {
+                <input name="username" type="text" maxlength="16"/>
+                <input type="submit" value="OK" />
+            }
+
+        </div>
+    </body>
+</html>

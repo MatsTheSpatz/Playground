@@ -1,7 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Recipe.Web.UI", "Recipe.Web.UI\Recipe.Web.UI.csproj", "{A0C89F45-00B7-415C-B6C6-ACE6A659BC61}"
+Project("{CC5FD16D-436D-48AD-A40C-5A424C6E3E79}") = "Recipe", "Recipe\Recipe.ccproj", "{CD94B439-530B-44B8-B6CF-0BC934D330F5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecipeWebRole", "RecipeWebRole\RecipeWebRole.csproj", "{C9E4D748-7671-45D4-A019-D6F1DDAA824B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -9,10 +11,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{A0C89F45-00B7-415C-B6C6-ACE6A659BC61}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A0C89F45-00B7-415C-B6C6-ACE6A659BC61}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A0C89F45-00B7-415C-B6C6-ACE6A659BC61}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A0C89F45-00B7-415C-B6C6-ACE6A659BC61}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CD94B439-530B-44B8-B6CF-0BC934D330F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD94B439-530B-44B8-B6CF-0BC934D330F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD94B439-530B-44B8-B6CF-0BC934D330F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD94B439-530B-44B8-B6CF-0BC934D330F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C9E4D748-7671-45D4-A019-D6F1DDAA824B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C9E4D748-7671-45D4-A019-D6F1DDAA824B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C9E4D748-7671-45D4-A019-D6F1DDAA824B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C9E4D748-7671-45D4-A019-D6F1DDAA824B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

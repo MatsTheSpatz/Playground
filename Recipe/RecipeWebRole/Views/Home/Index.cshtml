@@ -1,0 +1,30 @@
+﻿@model IEnumerable<int>
+@{
+    ViewBag.Title = "Start Page";
+}
+
+
+<h2>@ViewBag.Message</h2>
+
+<div>
+    <ul id="recipeList">
+        @foreach  (var id in @Model)
+        {
+            <li id="recipe@(id)"><a href="/Home/RecipeEditor?recipeId=@(id)">@id</a></li>
+        }
+    </ul>
+    <a href="/Home/RecipeEditor?recipeId=-1">New recipe...</a></>
+</div>
+
+<div>
+    <h1>Index</h1>
+    @Html.ActionLink("Hier geht's Inhouse", @"Inhouse")
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
+
