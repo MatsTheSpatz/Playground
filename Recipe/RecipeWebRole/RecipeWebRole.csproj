@@ -140,11 +140,23 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Content Include="app_code\Content.cshtml" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BlankRecipeEditorController.cs" />
+    <Compile Include="Controllers\CustomControllerFactory.cs" />
+    <Compile Include="Controllers\ImageController.cs" />
+    <Compile Include="DataAccess\MockOcrService.cs" />
+    <Compile Include="DataAccess\OcrService.cs" />
+    <Compile Include="Controllers\ScannedRecipeEditorController.cs" />
     <Compile Include="DataAccess\BlobStorageRecipeRepository.cs" />
+    <Compile Include="DataAccess\BlobStorageImageRepository.cs" />
+    <Compile Include="DataAccess\IImageRepository.cs" />
+    <Compile Include="DataAccess\IOcrService.cs" />
+    <Compile Include="Models\ImageRecipe.cs" />
+    <Compile Include="Models\Image.cs" />
     <Compile Include="DataAccess\IRecipeRepository.cs" />
     <Compile Include="DataAccess\InMemoryRecipeRepository.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="DataAccess\IUserRepository.cs" />
+    <Compile Include="Models\TextRecipe.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Utilities\QueryString.cs" />
     <Compile Include="Models\Recipe.cs" />
@@ -202,15 +214,18 @@
     <Content Include="Scripts\recipe\recipe.persistence.js" />
     <Content Include="Scripts\recipe\recipe.utilities.js" />
     <None Include="Scripts\snippets\ingredientsInTablejs.js" />
-    <Content Include="Views\Home\Inhouse.cshtml" />
     <Content Include="Views\Account\UserData.cshtml" />
-    <Content Include="Views\Home\RecipeEditor.cshtml" />
     <Content Include="Views\Snippets\SnippetKnockout.cshtml" />
     <Content Include="Views\Home\SearchRecipe.cshtml" />
     <Content Include="Views\Home\CreateRecipe.cshtml" />
     <Content Include="Views\Home\UserProfile.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Account\RequiresLogin.cshtml" />
+    <Content Include="Views\ScannedRecipeEditor\UploadImage.cshtml" />
+    <Content Include="Views\ScannedRecipeEditor\ProcessImage.cshtml" />
+    <Content Include="Views\BlankRecipeEditor\Open.cshtml" />
+    <Content Include="Views\ScannedRecipeEditor\OpenNew.cshtml" />
+    <Content Include="Views\ScannedRecipeEditor\OpenExisting.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="favicon.ico" />
@@ -246,6 +261,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Recipe.Ocr\Recipe.Ocr.csproj">
+      <Project>{FAB02312-10CA-4CE4-850D-980D4DA4E101}</Project>
+      <Name>Recipe.Ocr</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

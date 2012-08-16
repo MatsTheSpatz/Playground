@@ -8,6 +8,7 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using Microsoft.IdentityModel.Claims;
 using Microsoft.IdentityModel.Web;
+using RecipeWebRole.Controllers;
 using RecipeWebRole.DataAccess;
 using RecipeWebRole.Models;
 
@@ -25,6 +26,8 @@ namespace RecipeWebRole
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            ControllerBuilder.Current.SetControllerFactory(new CustomControllerFactory());
         }
 
         /// <summary>

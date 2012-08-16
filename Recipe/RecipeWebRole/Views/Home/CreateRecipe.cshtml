@@ -1,10 +1,9 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Rezept erstellen";
 }
 
 <h2>Rezept erstellen</h2>
-
+@*
 @if (!Request.IsAuthenticated) {
 
     <p>Nur angemeldete Nutzer und Nutzerinnen können ein neues Rezept erstellen.</p>
@@ -13,7 +12,13 @@
 } else {
     
     <p>Wie willst Du das neue Rezept erfassen?</p>
-    <p>@Html.ActionLink("mit Text-Editor", "Index", "Home", new { recipeId = -1 }, null) </p>                            
-    <p>@Html.ActionLink("gescanntes Rezept hochladen", "Index", "Home", new { recipeId = -1 }, null)  </p>                  
+    <p>@Html.ActionLink("mit Text-Editor", "Open", "BlankRecipeEditor", new { recipeId = -1 }, null) </p>                            
+    <p>@Html.ActionLink("gescanntes Rezept hochladen", "UploadImage", "ScannedRecipeEditor")  </p>                  
 
 }     
+*@
+
+
+    <p>Wie willst Du das neue Rezept erfassen?</p>
+    <p>@Html.ActionLink("mit Text-Editor", "Open", "BlankRecipeEditor", new { recipeId = -1 }, null) </p>                            
+    <p>@Html.ActionLink("gescanntes Rezept hochladen", "UploadImage", "ScannedRecipeEditor")  </p>                  

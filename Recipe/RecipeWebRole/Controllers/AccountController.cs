@@ -15,6 +15,13 @@ namespace RecipeWebRole.Controllers
     [ActionFilters.Authorize]
     public class AccountController : Controller
     {
+        private readonly IUserRepository _userRepo;
+
+        public AccountController(IUserRepository userRepo)
+        {
+            _userRepo = userRepo;
+        }
+
         //
         // GET: /Account/Login
         // Without view -> use WSFederationAuthenticationModule to redirect to Azure ACS
@@ -35,7 +42,7 @@ namespace RecipeWebRole.Controllers
             // The user successfully authenticated.
 
             string nameIdentifier = GetUserNameIdentifier();
-            if (!UserRepository.Instance.IsExistingUser(nameIdentifier))
+            if (!_userRepo.IsExistingUser(nameIdentifier))
             {
                 // New user. Redirect to page for recording user name.
                 var queryString = new QueryString { { "returnUrl", returnUrl } };
@@ -93,7 +100,7 @@ namespace RecipeWebRole.Controllers
             string userIdentifier = GetUserNameIdentifier();
 
             // TODO: validate that username is valid!
-            UserRepository.Instance.AddUser(new User { Id = userIdentifier, Name = username });
+            _userRepo.AddUser(new User { Id = userIdentifier, Name = username });
             
             if (Url.IsLocalUrl(returnUrl))
             {

@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Threading;
+using System.Web;
 using System.Web.Mvc;
 using Microsoft.IdentityModel.Claims;
 using RecipeWebRole.ActionFilters;
@@ -12,11 +15,15 @@ using RecipeWebRole.Utilities;
 
 namespace RecipeWebRole.Controllers
 {
-    [ActionFilters.Authorize]
+  //  [ActionFilters.Authorize]
     public class HomeController : Controller
     {
-        private static readonly IRecipeRepository _repo = new InMemoryRecipeRepository();//new FakeInMemoryRecipeRepository();
-        //private static readonly LocalFileSystemRecipeRepository _repo = LocalFileSystemRecipeRepository.Instance;
+        private readonly IRecipeRepository _recipeRepo;
+
+        public HomeController(IRecipeRepository recipeRepo)
+        {
+            _recipeRepo = recipeRepo;
+        }
 
         //
         // GET: /Home/Index
@@ -25,9 +32,9 @@ namespace RecipeWebRole.Controllers
         [AllowAnonymous]
         public ActionResult Index()
         {
-            IList<int> ids = _repo.GetRecipeIds();
+            IList<int> ids = _recipeRepo.GetRecipeIds();
             IEnumerable<Tuple<int, string>> data = (from id in ids
-                                                    let name = _repo.GetRecipe(id).Name
+                                                    let name = _recipeRepo.GetRecipe(id).Name
                                                     select new Tuple<int, string>(id, name)).ToList();
             return View(data);
         }
@@ -63,36 +70,6 @@ namespace RecipeWebRole.Controllers
         public ActionResult UserProfile()
         {
             return View();
-        }
-
-
-
-
-
-
-        public ActionResult RecipeEditor(int recipeId)
-        {
-            Recipe recipe = null;
-            if (recipeId > 0)
-            {
-                recipe = _repo.GetRecipe(recipeId);
-            }
-
-            // ViewBag is a dynamic object
-            ViewBag.Message = "Edit Recipe " + recipeId;
-            ViewBag.Recipe = recipe;
-
-            return View();
-        }
-
-        [HttpPost]
-        public JsonResult SetRecipe(Recipe recipe)
-        {
-            _repo.SetRecipe(recipe);
-
-            Thread.Sleep(1000);
-            //  throw new ArgumentException("Bad things happended");
-            return Json(recipe);
         }
     }
 }

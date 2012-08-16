@@ -5,6 +5,8 @@ Project("{CC5FD16D-436D-48AD-A40C-5A424C6E3E79}") = "Recipe", "Recipe\Recipe.ccp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecipeWebRole", "RecipeWebRole\RecipeWebRole.csproj", "{C9E4D748-7671-45D4-A019-D6F1DDAA824B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Recipe.Ocr", "Recipe.Ocr\Recipe.Ocr.csproj", "{FAB02312-10CA-4CE4-850D-980D4DA4E101}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,6 +21,10 @@ Global
 		{C9E4D748-7671-45D4-A019-D6F1DDAA824B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C9E4D748-7671-45D4-A019-D6F1DDAA824B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C9E4D748-7671-45D4-A019-D6F1DDAA824B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FAB02312-10CA-4CE4-850D-980D4DA4E101}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FAB02312-10CA-4CE4-850D-980D4DA4E101}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FAB02312-10CA-4CE4-850D-980D4DA4E101}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FAB02312-10CA-4CE4-850D-980D4DA4E101}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

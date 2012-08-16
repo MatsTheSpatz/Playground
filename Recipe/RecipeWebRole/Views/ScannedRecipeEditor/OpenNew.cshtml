@@ -1,0 +1,17 @@
+﻿@model RecipeWebRole.Models.ImageRecipe
+
+@{
+    ViewBag.Title = "Open";
+}
+
+<h2>Open New</h2>
+
+
+
+<img src="/Image/Get?imageId=@Model.ImageId" alt="Recipe Image" />
+
+
+<h3>Dies ist der Text:</h3>
+<div>
+    @Model.ScannedText
+</div>

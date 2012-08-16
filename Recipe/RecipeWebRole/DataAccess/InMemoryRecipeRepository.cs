@@ -13,9 +13,9 @@ namespace RecipeWebRole.DataAccess
         {
             _recipes = new List<Recipe>();
 
-            _recipes.Add(new Recipe() { Id = 3412, Name = "Bunte Smarties" });
-            _recipes.Add(new Recipe() { Id = 1399, Name = "BigMac mit fetten Pommes und Cola" });
-            _recipes.Add(new Recipe() { Id = 7100, Name = "Truffes du jour an Bärlauchsauce" });
+            _recipes.Add(new TextRecipe() { Id = 3412, Name = "Bunte Smarties" });
+            _recipes.Add(new TextRecipe() { Id = 1399, Name = "BigMac mit fetten Pommes und Cola" });
+            _recipes.Add(new TextRecipe() { Id = 7100, Name = "Truffes du jour an Bärlauchsauce" });
         }
 
         public IList<int> GetRecipeIds()

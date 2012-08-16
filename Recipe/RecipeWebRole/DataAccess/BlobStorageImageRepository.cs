@@ -1,20 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.IO;
 using System.Linq;
-using System.Xml.Serialization;
 using Microsoft.WindowsAzure;
 using Microsoft.WindowsAzure.StorageClient;
 using RecipeWebRole.Models;
 
 namespace RecipeWebRole.DataAccess
 {
-    public class BlobStorageRecipeRepository : IRecipeRepository
+    public class BlobStorageImageRepository : IImageRepository
     {
-        private const string BlobContainer = "recipecontainer";  // must be lowercase!!!
+        private const string BlobContainer = "imagecontainer";  // must be lowercase!!!
 
-        public IList<int> GetRecipeIds()
+        public IList<int> GetImageIds()
         {
             CloudBlobContainer container = GetBlobContainer();
 
@@ -28,7 +26,7 @@ namespace RecipeWebRole.DataAccess
             return ids.Select(Int32.Parse).ToList();
         }
 
-        public Recipe GetRecipe(int id)
+        public Image GetImage(int id)
         {
             // Retrieve reference to blob.
             CloudBlobContainer container = GetBlobContainer();
@@ -38,13 +36,8 @@ namespace RecipeWebRole.DataAccess
             // get data (if it exists)
             try
             {
-                byte[] recipeData = blob.DownloadByteArray();
-
-                string rType = blob.Metadata.Get("RType");
-                Type recipeType = (rType == "Image") ? typeof(ImageRecipe) : typeof(TextRecipe);
-                
-                Recipe recipe = DeserializeFromXml(recipeData, recipeType);
-                return recipe;
+                byte[] data = blob.DownloadByteArray();
+                return new Image() { Id = id, Data = data};
             }
             catch (Exception)
             {
@@ -52,38 +45,29 @@ namespace RecipeWebRole.DataAccess
             }
         }
 
-        public void SetRecipe(Recipe recipe)
+        public void SetImage(Image image)
         {
-            if (recipe.Id <= 0)
+            if (image.Id <= 0)
             {
-                recipe.Id = CreateUniqueRecipeId();
-            }
-
-            bool isImageRecipe = recipe is ImageRecipe;
-            if (isImageRecipe && (recipe as ImageRecipe).ImageId <= 0)
-            {
-                throw new ArgumentException("Image Id is mandatory for an ImageRecipe.");
+                image.Id = CreateUniqueId();
             }
 
             // Retrieve reference to blob.
             CloudBlobContainer container = GetBlobContainer();
-            string blobId = recipe.Id.ToString(CultureInfo.InvariantCulture);
+            string blobId = image.Id.ToString(CultureInfo.InvariantCulture);
             CloudBlob blob = container.GetBlobReference(blobId);
            
             // Uplaod recipe
-            byte[] recipeData = SerializeToXml(recipe, isImageRecipe ? typeof(ImageRecipe) : typeof(TextRecipe));
-            blob.UploadByteArray(recipeData);
-            blob.Metadata.Add("RType", (recipe is ImageRecipe) ? "Image" : "Text");
-            blob.SetMetadata();
+            blob.UploadByteArray(image.Data);
         }
 
-        private int CreateUniqueRecipeId()
+        private int CreateUniqueId()
         {
             // TODO: do this differently 
             // (see for example http://blog.tatham.oddie.com.au/2011/07/14/released-snowmaker-a-unique-id-generator-for-azure-or-any-other-cloud-hosting-environment/
             
             var random = new Random();
-            IList<int> recipeIds = GetRecipeIds();
+            IList<int> recipeIds = GetImageIds();
 
             int maxNumberOfTrials = 100;
             while (maxNumberOfTrials-- > 0)
@@ -97,6 +81,7 @@ namespace RecipeWebRole.DataAccess
 
             throw new InvalidOperationException("Unable to create unique ID.");
         }
+
         private CloudBlobContainer GetBlobContainer()
         {
             CloudBlobClient blobClient = GetCloudBlobClient();
@@ -121,24 +106,5 @@ namespace RecipeWebRole.DataAccess
             return blobClient;
         }
 
-        private static byte[] SerializeToXml(Recipe recipe, Type recipeType)
-        {
-            var serializer = new XmlSerializer(recipeType);
-            using (var memoryStream = new MemoryStream())
-            {
-                serializer.Serialize(memoryStream, recipe);
-                return memoryStream.GetBuffer();
-            }
-        }
-
-        private static Recipe DeserializeFromXml(byte[] buffer, Type recipeType)
-        {
-            var serializer = new XmlSerializer(recipeType);
-            using (var memoryStream = new MemoryStream(buffer))
-            {
-                var recipe = (Recipe)serializer.Deserialize(memoryStream);
-                return recipe;
-            }
-        }
     }
 }

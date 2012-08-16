@@ -1,0 +1,46 @@
+﻿
+<h2>Rezept erstellen</h2>
+
+<p>
+    Dein gescanntes Rezept wurde erfolgreich an den Server übermittelt.
+</p>
+<p>    
+    Der Server versucht jetzt eine automatisierte Texterkennung des gesacannten Rezeptes.
+    Der erkannte Text wird Dir bei der weiteren Erfassung des Rezeptes helfen.
+</p>
+<p>
+    Dieser Prozess kann bis zu 5 Sekunden dauern. Bitte Geduld...    
+</p>
+
+<img src="/Content/wait-indicator.gif" alt="Wait" />
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        var imageId = @ViewBag.ImageId;
+
+        (function poll() {
+            setTimeout(function () {
+
+                var date = new Date();  // make call unique, so it is not cached.
+                $.getJSON("/ScannedRecipeEditor/IsOcrComplete", { 'imageId': @ViewBag.ImageId, 'seed': date.getTime() })
+                    .success(function (data) {
+                        // Expect one boolean with true/false
+                        var keyValuePair = data[0];
+                        var hasCompleted = keyValuePair.Value;
+
+                        if (hasCompleted) {
+                            window.location = '/ScannedRecipeEditor/OpenNew?imageId=@ViewBag.ImageId';
+                        } else {
+                            poll(); //Setup the next poll recursively
+                        }
+                    })
+                    .error(function() {
+                        alert("failure");
+                    });
+            }, 500);  // poll delay 
+        })();
+    });
+</script>
