@@ -58,8 +58,7 @@ namespace RecipeOcr
             };
 
             // set request
-            string filePath = @"C:\Temp\Capture.jpg";
-            Task task = _restServiceClient.ProcessImage(filePath, settings);
+            Task task = _restServiceClient.ProcessImage(data, settings);
             return task;
         }
 

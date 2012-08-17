@@ -64,6 +64,44 @@ namespace RecipeOcr
         /// <param name="settings">Language and output format</param>
         /// <returns>Id of the task. Check task status to see if you have enough units to process the task</returns>
         /// <exception cref="ProcessingErrorException">thrown when something goes wrong</exception>
+        public Task ProcessImage(byte[] data, ProcessingSettings settings)
+        {
+            string url = String.Format("{0}/processImage?{1}", ServerUrl, settings.AsUrlParams);
+
+            if (!String.IsNullOrEmpty(settings.Description))
+            {
+                url = url + "&description=" + Uri.EscapeDataString(settings.Description);
+            }
+
+            try
+            {
+                // Build post request
+                WebRequest request = WebRequest.Create(url);
+                SetupPostRequest(url, request);
+                WriteFileToRequest(data, request);
+
+                XDocument response = PerformRequest(request);
+                Task task = ServerXml.GetTaskStatus(response);
+                return task;
+            }
+            catch (WebException e)
+            {
+                String friendlyMessage = retrieveFriendlyMessage(e);
+                if (friendlyMessage != null)
+                {
+                    throw new ProcessingErrorException(friendlyMessage, e);
+                }
+                throw new ProcessingErrorException("Cannot upload file", e);
+            }
+        }
+
+        /// <summary>
+        /// Upload a file to service synchronously and start processing
+        /// </summary>
+        /// <param name="filePath">Path to an image to process</param>
+        /// <param name="settings">Language and output format</param>
+        /// <returns>Id of the task. Check task status to see if you have enough units to process the task</returns>
+        /// <exception cref="ProcessingErrorException">thrown when something goes wrong</exception>
         public Task ProcessImage(string filePath, ProcessingSettings settings)
         {
             string url = String.Format("{0}/processImage?{1}", ServerUrl,  settings.AsUrlParams);
@@ -343,6 +381,15 @@ namespace RecipeOcr
         {
             SetupRequest(serverUrl, request);
             request.Method = "GET";
+        }
+
+        private void WriteFileToRequest(byte[] data, WebRequest request)
+        {
+            request.ContentLength = data.Length;
+            using (Stream stream = request.GetRequestStream())
+            {
+                stream.Write(data, 0, data.Length);
+            }
         }
 
         private void WriteFileToRequest( string filePath, WebRequest request )

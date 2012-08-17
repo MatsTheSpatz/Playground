@@ -6,15 +6,6 @@ using RecipeWebRole.Models;
 
 namespace RecipeWebRole.DataAccess
 {
-    //if (!_imageProcessingTimes.ContainsKey(imageId))
-    //{
-    //    _imageProcessingTimes.Add(imageId, DateTime.Now);
-    //}
-
-    //DateTime startProcessingTime = _imageProcessingTimes[imageId];
-    //bool isComplete = (DateTime.Now - startProcessingTime).TotalMilliseconds > 4000;
-    //private static Dictionary<int, DateTime> _imageProcessingTimes = new Dictionary<int, DateTime>();
-
     public class OcrService : IOcrService
     {
         private static readonly Dictionary<int, Task> _imageOcrTasks = new Dictionary<int, Task>();
