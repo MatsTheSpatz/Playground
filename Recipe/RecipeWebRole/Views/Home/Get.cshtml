@@ -1,0 +1,102 @@
+﻿@using RecipeWebRole.Models
+@model RecipeWebRole.Models.TextRecipe
+
+@{
+    ViewBag.Title = Model.Name;
+}
+
+<h2>
+    @(Model.Name)
+    <img src="/Content/vegetarian.png" alt="Vegetarisch!" />
+</h2>
+
+<div id="ingredients">
+    <h3>Zutaten</h3>
+    
+    @if (!string.IsNullOrEmpty(Model.Quantity))
+    {
+        <p>@(Model.Quantity)</p>
+    }
+    
+    @foreach (IngredientSection section in Model.IngredientSections)
+    {        
+        <div class="sectionHeader">@(section.SectionHeader)</div>
+        <ul>
+            @foreach( string ingredient in section.Items)
+            {
+                <li>@(ingredient)</li>
+            }
+        </ul>
+    }
+</div>
+
+<hr/>
+
+<div id="instructions">
+    <h3>Zubereitung</h3>
+
+    @if (!string.IsNullOrEmpty(Model.PreparationTime))
+    {
+        <p>Vorbereitungszeit: @(Model.PreparationTime)</p>
+    }
+    
+    @if (!string.IsNullOrEmpty(Model.CookingTime))
+    {
+        <p>Kochzeit: @(Model.CookingTime)</p>
+    }
+    
+    @foreach (Instruction instruction in Model.Instructions)
+    {   
+        <div>@(instruction.Text)</div>
+    }
+</div>
+
+<hr/>
+
+<div id="additionalInfo">
+    
+    <div>
+        Author: @(Model.Author)
+    </div>
+
+    <div>
+        Creation-date: @(Model.CreationDate)
+    </div>
+
+    <div>
+        Last modification date: @(Model.ModificationDate)
+    </div>
+</div>
+
+<div id="season">
+    Spezielle Saison:
+        
+    @if (Model.Seasons == null || Model.Seasons.Length == 0)
+    {
+        <text> - </text>
+    }
+    else
+    {
+        foreach (Season season in Model.Seasons)
+        {
+            <text> @(season) </text>
+        }
+    }
+</div>
+
+<div id="dish">
+    Geeignet als:
+        
+    @if (Model.DishCategories == null || Model.DishCategories.Length == 0)
+    {
+        <text> - </text>
+    }
+    else
+    {
+        foreach (DishCategory category in Model.DishCategories)
+        {
+            <text> @(category) </text>
+        }
+    }
+</div>
+

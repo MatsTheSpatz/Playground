@@ -74,5 +74,24 @@ namespace RecipeWebRole.Controllers
         {
             return View();
         }
+
+
+        //
+        // GET: /Home/UserProfile
+
+        [HttpGet]
+        [AllowAnonymous]
+        public ActionResult Get(int recipeId)
+        {
+            Recipe recipe = _recipeRepo.GetRecipe(recipeId);
+            if (recipe == null)
+            {
+                throw new ArgumentException("Invalid recipe-Id " + recipeId);
+            }
+
+            return View(recipe as TextRecipe);
+
+
+        }
     }
 }

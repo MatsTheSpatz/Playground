@@ -11,7 +11,7 @@
         @foreach  (var recipe in @Model)
         {
             <li>                
-                @Html.ActionLink("ID" + recipe.Item1, "Open", "BlankRecipeEditor", new { recipeId = recipe.Item1 }, null)
+                @Html.ActionLink("ID" + recipe.Item1, "Get", "Home", new { recipeId = recipe.Item1 }, null)
                 @(recipe.Item2)
             </li>
         }
