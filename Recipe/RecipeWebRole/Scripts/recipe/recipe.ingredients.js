@@ -25,10 +25,9 @@ recipe.ingredients = (function () {
     };
 
     return {
-        init: function ($ingredients, $addSection) {
-
-            $ingredientsDiv = $ingredients;
-            $addSectionButton = $addSection;
+        init: function () {
+            $ingredientsDiv = $('#ingredientSections');
+            $addSectionButton = $('#addIngredientSection');
 
             // convert add-button to jquery UI button
             recipe.utilities.convertToJQueryUiButton($addSectionButton);
@@ -69,18 +68,29 @@ recipe.ingredients = (function () {
                     sections.push(sectionData);
                 }
             }
-            return sections;
+
+            return {
+                'Quantity': $('#ingredientQuantity').val(),
+                'IngredientSections': sections
+            };
         },
 
-        setData: function (sections) {
+        setData: function (data) {
+
+            var sections = (data && 'IngredientSections' in data) ? data['IngredientSections'] : undefined;
+            var quantity = (data && 'Quantity' in data) ? data['Quantity'] : '';
+
+            $('#ingredientQuantity').val(quantity);
+
+            var section;
             if (sections && sections.length >= 1) {
                 for (var i = 0; i < sections.length; i++) {
-                    var section = this.addSection();
+                    section = this.addSection();
                     section.setData(sections[i]);
                 }
             } else {
                 // add first section
-                var section = this.addSection();
+                section = this.addSection();
                 section.setData();
             }
         }

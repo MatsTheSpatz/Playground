@@ -16,6 +16,11 @@ body
 }
 
 
+ .ui-tabs-panel { 
+    height: 300px; 
+    overflow: auto; 
+} 
+
 
 /* ======================== */
 

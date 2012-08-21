@@ -170,10 +170,14 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WebRole.cs" />
     <Content Include="app_code\Info.txt" />
+    <Content Include="Content\Recipe.Categories.css" />
+    <Content Include="Content\delete.gif" />
     <Content Include="Content\MatsStyleSheet.css" />
+    <Content Include="Content\rateit.css" />
     <Content Include="Content\Recipe.Ingredients.css" />
     <Content Include="Content\Recipe.Instructions.css" />
     <Content Include="Content\Header.css" />
+    <Content Include="Content\star.gif" />
     <Content Include="Content\themes\ui-lightness\images\ui-bg_diagonals-thick_18_b81900_40x40.png" />
     <Content Include="Content\themes\ui-lightness\images\ui-bg_diagonals-thick_20_666666_40x40.png" />
     <Content Include="Content\themes\ui-lightness\images\ui-bg_flat_10_000000_40x100.png" />
@@ -201,15 +205,19 @@
     <Content Include="Scripts\jquery-validate\jquery.validate.min.js" />
     <Content Include="Scripts\jquery-validate\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery-validate\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\jquery.rateit.js" />
+    <Content Include="Scripts\jquery.rateit.min.js" />
     <Content Include="Scripts\jquery\jquery-1.7.2-vsdoc.js" />
     <Content Include="Scripts\jquery\jquery-1.7.2.js" />
     <Content Include="Scripts\jquery\jquery-1.7.2.min.js" />
     <Content Include="Scripts\knockout\knockout-2.1.0.debug.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
-    <Content Include="Scripts\recipe\recipe.general.js" />
+    <Content Include="Scripts\recipe\recipe.categories.js" />
+    <Content Include="Scripts\recipe\recipe.generalInfo.js" />
     <Content Include="Scripts\recipe\recipe.ingredientList.js" />
     <Content Include="Scripts\recipe\recipe.ingredients.js" />
     <Content Include="Scripts\recipe\recipe.ingredientSection.js" />
+    <Content Include="Scripts\recipe\recipeEditor.init.js" />
     <Content Include="Scripts\recipe\recipe.instructions.js" />
     <Content Include="Scripts\recipe\recipe.persistence.js" />
     <Content Include="Scripts\recipe\recipe.utilities.js" />
@@ -223,9 +231,16 @@
     <Content Include="Views\Account\RequiresLogin.cshtml" />
     <Content Include="Views\ScannedRecipeEditor\UploadImage.cshtml" />
     <Content Include="Views\ScannedRecipeEditor\ProcessImage.cshtml" />
-    <Content Include="Views\BlankRecipeEditor\Open.cshtml" />
     <Content Include="Views\ScannedRecipeEditor\OpenNew.cshtml" />
     <Content Include="Views\ScannedRecipeEditor\OpenExisting.cshtml" />
+    <Content Include="Views\BlankRecipeEditor\RecipeEditor.Categories.cshtml" />
+    <Content Include="Views\BlankRecipeEditor\RecipeEditor.Ingredients.cshtml" />
+    <Content Include="Views\BlankRecipeEditor\RecipeEditor.Instructions.cshtml" />
+    <Content Include="Views\BlankRecipeEditor\Copy of Open.cshtml" />
+    <Content Include="Views\BlankRecipeEditor\RecipeEditor.GeneralInfo.cshtml" />
+    <Content Include="Views\BlankRecipeEditor\RecipeEditor.Dialogs.cshtml" />
+    <Content Include="Views\BlankRecipeEditor\Open.cshtml" />
+    <Content Include="Views\BlankRecipeEditor\RecipeEditor.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="favicon.ico" />

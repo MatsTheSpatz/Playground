@@ -72,7 +72,8 @@
 
 #ingredientSections input.idleField {
     border: 1px solid #dddddd; 
-    background: #eeeeee;
+    background: #fafafa;
+    /*background: #eeeeee;*/
 }
 
 #ingredientSections input.focusField {

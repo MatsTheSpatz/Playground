@@ -1,0 +1,27 @@
+﻿@* ======== Dialogs ========= *@
+
+<div id="saveInProgress-dialog">
+    <img src="/Content/wait-indicator.gif" alt="Wait" />
+    <p>Please wait while saving data.</p>
+</div>
+
+<div id="saveSucceeded-dialog">
+    <p>Your recipe was successfully saved.</p>
+</div>
+
+<div id="saveFailed-dialog">
+    <p><b>Your recipe was not saved!</b></p>
+    <p class="save-failure-reason"></p>
+    What are my options now?
+    <ul>
+        <li>Try saving the recipe it again. The problem might have been a temporary hiccup on the networt or the server.</li>
+        <li>For your convenience, the recipe can be stored as cookie on your computer. Then, the next time you connect to the server, you will be prompted to save the recipe. Your work won't be lost.</li>
+        <li>You can view a textual representation of the recipe and store it to your local disk. You can upload this file later to the server.</li>
+    </ul>
+</div>
+
+<div id="recipeAsText-dialog">
+    <div>
+        <textarea id="recipeText" cols="50" rows="50" readonly="readonly"></textarea>
+    </div>
+</div>

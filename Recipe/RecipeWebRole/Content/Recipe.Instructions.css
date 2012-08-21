@@ -61,6 +61,7 @@
     border-color: #dddddd;
     margin-left: 10px;
     margin-right: 20px;
+    background: #fafafa;
 }
 
 #instructions span.instructionText[indentation="level0"] 

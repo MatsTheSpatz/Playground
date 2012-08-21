@@ -16,7 +16,7 @@ namespace RecipeWebRole.DataAccess
 
             Thread.Sleep(2500);
 
-            _imageResults[image.Id] = "Hier ist der Text des Ocr Resultes aber es ist nur ein Mock";
+            _imageResults[image.Id] = "Hier ist der Text des Ocr Resultes\n aber es ist nur ein Mock";
         }
 
         public string GetOcrResult(int imageId)

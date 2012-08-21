@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Dynamic;
 using System.Globalization;
 using System.IO;
@@ -25,6 +26,7 @@ namespace RecipeWebRole.Controllers
             _recipeRepo = recipeRepo;
         }
 
+
         //
         // GET: /Home/Index
 
@@ -32,6 +34,7 @@ namespace RecipeWebRole.Controllers
         [AllowAnonymous]
         public ActionResult Index()
         {
+
             IList<int> ids = _recipeRepo.GetRecipeIds();
             IEnumerable<Tuple<int, string>> data = (from id in ids
                                                     let name = _recipeRepo.GetRecipe(id).Name

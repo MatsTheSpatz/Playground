@@ -13,6 +13,8 @@ recipe.formats = {
 
 recipe.instructions = (function () {
 
+    var defaultText = '...';
+
     var $enclosingDiv;
     var lastFocusedElement;
     var editorWasOpenOnMouseDown = false;
@@ -77,8 +79,15 @@ recipe.instructions = (function () {
     function createTextSpan(text) {
         var $textSpan = $(document.createElement('span'));
         $textSpan.addClass('instructionText');
-        $textSpan.html(text ? text : '');
-        
+        //$textSpan.html(text ? text : '<text>');
+
+        if (text && text.length > 0) {
+            $textSpan.html(text);
+        } else {
+            $textSpan.html(defaultText);
+            $textSpan.css('color', '#bbbbbb');
+        }
+
         return $textSpan;
     }
 
@@ -145,6 +154,10 @@ recipe.instructions = (function () {
         if (!text || text.length == 0) {
             return undefined;
         }
+        if (text && text == defaultText) {
+            return undefined;
+        }
+        
         return { 'Text': text, 'Level': level };
     }
 
@@ -214,6 +227,10 @@ recipe.instructions = (function () {
         $textarea.css("margin-right", rightMargin);
 
         var currentText = $spanText.html();
+        if (currentText == defaultText) {
+            currentText = '';
+        }
+
         $textarea.val(currentText);
 
         // key down
@@ -251,7 +268,7 @@ recipe.instructions = (function () {
         var text = $textarea.val(); // don't use html()        
         text = $.trim(text);
 
-        if (text.length >= 1) {
+      //  if (text.length >= 1) {
             // replace textarea with textspan.
             var $textSpan = createTextSpan(text);
             $textarea.replaceWith($textSpan);
@@ -259,10 +276,10 @@ recipe.instructions = (function () {
             //var $marker = $('span.marker', $instructionDiv);
             var indentationLevel = getIndentationLevel($instructionDiv);
             setIndentationLevel($instructionDiv, indentationLevel);
-        } else {
-            // drop this entry
-            $instructionDiv.remove();
-        }
+//        } else {
+//            // drop this entry
+//            $instructionDiv.remove();
+//        }
     }
 
     function setSelectionRange(element, selectionStart, selectionEnd) {
@@ -320,7 +337,8 @@ recipe.instructions = (function () {
     }
 
     return {
-        init: function ($instructionsDiv) {
+        init: function () {
+            var $instructionsDiv = $('#instructions');
 
             $enclosingDiv = $instructionsDiv;
             $enclosingDiv.append(createAddInstructionButton());
@@ -353,6 +371,9 @@ recipe.instructions = (function () {
                 lastFocusedElement = document.elementFromPoint(window.mouseXPos, window.mouseYPos);
                 editorWasOpenOnMouseDown = $('textarea', $enclosingDiv).length == 1;
             });
+
+            // default level format
+            this.setLevelFormats(recipe.formats.Number, recipe.formats.Bullet, recipe.formats.None);
         },
 
         setLevelFormat: function (level, format) {
@@ -389,10 +410,23 @@ recipe.instructions = (function () {
                     instructions.push(instruction);
                 }
             });
-            return (instructions.length == 0) ? undefined : instructions;
+
+            return {
+                'PreparationTime': $('#preparationTime').val(),
+                'CookingTime': $('#cookingTime').val(),
+                'Instructions': (instructions.length == 0) ? undefined : instructions
+            };
         },
 
-        setData: function (instructions) {
+        setData: function (data) {
+
+            var preparationTime = (data && 'PreparationTime' in data) ? data['PreparationTime'] : '';
+            var cookingTime = (data && 'CookingTime' in data) ? data['CookingTime'] : '';
+            var instructions = (data && 'Instructions' in data) ? data['Instructions'] : undefined;
+
+            $('#preparationTime').val(preparationTime);
+            $('#cookingTime').val(cookingTime);
+
             if (instructions && instructions.length >= 1) {
                 // fill in existing data
                 for (var i = 0; i < instructions.length; i++) {

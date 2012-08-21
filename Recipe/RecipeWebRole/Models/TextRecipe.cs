@@ -10,20 +10,25 @@ namespace RecipeWebRole.Models
     [XmlRoot("TextRecipe", Namespace = "http://www.matsbader.com", IsNullable = false)]
     public class TextRecipe : Recipe
     {
+        public TextRecipe()
+        {
+            SkillLevel = SkillLevel.Average;
+        }
+
         [XmlArray("IngredientSections")]
-        public IngredientSection[] Ingredients { get; set; }
+        public IngredientSection[] IngredientSections { get; set; }
 
         [XmlArray("Instructions")]
         public Instruction[] Instructions { get; set; }
-
     }
+
 
     [Serializable]
     public class IngredientSection
     {
         public string SectionHeader { get; set; }
 
-        //        [XmlArrayAttribute("Ingredients")]
+        [XmlArrayAttribute("IngredientItems")]
         public string[] Items { get; set; }
     }
 

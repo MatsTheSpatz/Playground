@@ -1,0 +1,40 @@
+﻿
+/* ---------------------------------------- */
+/*             Instructions
+/* ---------------------------------------- */
+
+div#categoriesDiv 
+{
+    position:relative;
+}
+
+div#categoriesDiv fieldset 
+{
+    margin-bottom: 10px;
+    margin-top: 5px;
+    padding: 4px;
+    width: 220px;
+    border: 1px solid #888888;
+}
+
+div#categoriesDiv .leftColumn {
+    position:absolute;
+    left:0;
+    width: 220px;    
+}
+
+div#categoriesDiv .rightColumn {
+    position:absolute;
+    left:250px;
+    width: 220px;    
+}
+
+div#categoriesDiv legend {
+    padding: 0.2em 0.5em;
+    font-size:110%;
+    font-weight: bold;    
+ }
+
+div#categoriesDiv .rateit {
+    margin-left: 10px;
+}

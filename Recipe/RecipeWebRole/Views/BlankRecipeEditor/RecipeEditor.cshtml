@@ -1,0 +1,33 @@
+﻿
+<div id="tabs">    
+    <ul>
+        <li><a href="#tabs-1">Titel</a></li>
+        <li><a href="#tabs-2">Zutaten</a></li>
+        <li><a href="#tabs-3">Instruktionen</a></li>
+        <li><a href="#tabs-4">Kategorisierung</a></li>
+    </ul>
+
+    <div id="tabs-1">
+        @Html.Partial("RecipeEditor.GeneralInfo")  
+    </div>
+        
+    <div id="tabs-2">
+        @Html.Partial("RecipeEditor.Ingredients")  
+    </div>
+
+    <div id="tabs-3">
+        @Html.Partial("RecipeEditor.Instructions")  
+    </div>
+
+    <div id="tabs-4">
+        @Html.Partial("RecipeEditor.Categories")  
+    </div>
+
+</div>
+ 
+<br/>
+
+<button id="saveRecipe">Save Recipe</button>
+<button id="showRecipeAsText">Show as text..</button>
+
+@Html.Partial("RecipeEditor.Dialogs")  

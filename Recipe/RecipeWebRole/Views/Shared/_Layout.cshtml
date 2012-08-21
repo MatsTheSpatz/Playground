@@ -8,7 +8,7 @@
         <meta name="viewport" content="width=device-width" />
         @Styles.Render("~/Content/themes/base/css", "~/Content/RecipeEditor")
         @Scripts.Render("~/bundles/modernizr")
-        @Scripts.Render("~/bundles/jquery", "~/bundles/jqueryui", "~/bundles/recipe")    @*This should go to the end! *@
+        @Scripts.Render("~/bundles/jquery", "~/bundles/jqueryui")    @*This should go to the end! *@
     </head>
     <body>
         <header>
@@ -53,7 +53,7 @@
             </div>
         </footer>
 
-        @Scripts.Render("~/bundles/jquery", "~/bundles/jqueryui")
+    @*    @Scripts.Render("~/bundles/jquery", "~/bundles/jqueryui")*@
         @RenderSection("scripts", required: false)
     </body>
 </html>

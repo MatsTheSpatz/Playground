@@ -35,8 +35,13 @@ namespace RecipeWebRole.Controllers
             string text = _ocrService.GetOcrResult(imageId);
             var recipe = new ImageRecipe {ImageId = imageId, ScannedText = text };
 
+
             return View(recipe);
         }
+
+
+        //
+        // GET: /ScannedRecipeEditor/OpenExisting
 
         [HttpGet]
         public ActionResult OpenExisting(int recipeId)
@@ -49,6 +54,7 @@ namespace RecipeWebRole.Controllers
 
             return View(recipe);
         }
+
 
         //
         // GET: /ScannedRecipeEditor/UploadImage

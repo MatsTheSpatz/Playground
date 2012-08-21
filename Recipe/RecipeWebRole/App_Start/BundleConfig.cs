@@ -27,6 +27,7 @@ namespace RecipeWebRole
                 "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/recipe").Include(
+                "~/Scripts/jquery.rateit.js",
                 "~/Scripts/recipe/recipe*"));
         }
 
@@ -39,7 +40,9 @@ namespace RecipeWebRole
 
             bundles.Add(new StyleBundle("~/Content/recipeEditor").Include(
                 "~/Content/MatsStyleSheet.css",
+                "~/Content/rateit.css",
                 "~/Content/Recipe.Ingredients.css",
+                "~/Content/Recipe.Categories.css",
                 "~/Content/Recipe.Instructions.css"));
         }
     }

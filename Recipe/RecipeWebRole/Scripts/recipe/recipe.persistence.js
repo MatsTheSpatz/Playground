@@ -115,7 +115,7 @@ recipe.persistence = (function () {
 
         var jqxhr = $.ajax({
             type: "POST",
-            url: "/Home/SetRecipe",
+            url: "/BlankRecipeEditor/Save",
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
             data: jsonText
@@ -175,9 +175,12 @@ recipe.persistence = (function () {
 
     function getData() {
 
-        var data = recipe.general.getData();
-        data['Ingredients'] = recipe.ingredients.getData();
-        data['Instructions'] = recipe.instructions.getData();
+        var data = {};
+
+        $.each(recipe.generalInfo.getData(), function (name, value) { data[name] = value; });
+        $.each(recipe.ingredients.getData(), function (name, value) { data[name] = value; });
+        $.each(recipe.instructions.getData(), function (name, value) { data[name] = value; });
+        $.each(recipe.categories.getData(), function (name, value) { data[name] = value; });
 
         var jsonText = window.JSON.stringify(data);
         return jsonText;
@@ -185,7 +188,9 @@ recipe.persistence = (function () {
 
 
     return {
-        init: function ($saveButton, $showRecipeAsTextButton) {
+        init: function () {
+            var $saveButton = $('#saveRecipe');
+            var $showRecipeAsTextButton = $('#showRecipeAsText');
 
             $saveButton.button({ icons: { primary: 'ui-icon-transferthick-e-w'} });
             $saveButton.click(function () { postDataToServer(getData()); });
@@ -200,10 +205,11 @@ recipe.persistence = (function () {
         },
 
         setData: function (data) {
-            recipe.general.setData(data);
-
-            recipe.ingredients.setData(data ? data['Ingredients'] : undefined);
-            recipe.instructions.setData(data ? data['Instructions'] : undefined);
+            recipe.generalInfo.setData(data);
+           // recipe.ingredients.setData(data ? data['Ingredients'] : undefined);
+            recipe.ingredients.setData(data);
+            recipe.instructions.setData(data);
+            recipe.categories.setData(data);
         }
 
 

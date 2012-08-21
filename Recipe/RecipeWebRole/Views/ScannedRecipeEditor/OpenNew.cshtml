@@ -12,6 +12,11 @@
 
 
 <h3>Dies ist der Text:</h3>
+
 <div>
-    @Model.ScannedText
+@{foreach (var line in Model.ScannedText.Split('\n'))
+    {
+        @line<br/>          
+    }
+}
 </div>

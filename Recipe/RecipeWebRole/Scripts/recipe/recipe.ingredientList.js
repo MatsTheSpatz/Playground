@@ -71,8 +71,8 @@ IngredientList.prototype = function () {
         addRow: function (text) {
 
             var elements = '<input class="rowInput idleField" type="text" maxlength="40" placeholder="Ingredient" /> \
-                            <span class="dragHelper ui-icon ui-icon-arrowthick-2-n-s"></span> \
-                            <button class="deleteRow" data-button-icon="delete" data-button-action="delete">A</button>';
+                            <button class="deleteRow" data-button-icon="delete" data-button-action="delete">A</button> \
+                            <span class="dragHelper ui-icon ui-icon-arrowthick-2-n-s"></span>';
 
             var $li = $(document.createElement('li'));
             $li.html(elements);
@@ -151,8 +151,8 @@ IngredientList.prototype = function () {
                     this.addRow(ingredientItems[i]);
                 }
             } else {
-                // add 3 empty rows
-                for (var i = 0; i < 3; i++) {
+                // add 1 empty row
+                for (var i = 0; i < 1; i++) {
                     this.addRow();
                 }
             }

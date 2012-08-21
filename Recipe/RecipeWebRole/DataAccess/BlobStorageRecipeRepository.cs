@@ -88,7 +88,7 @@ namespace RecipeWebRole.DataAccess
             int maxNumberOfTrials = 100;
             while (maxNumberOfTrials-- > 0)
             {
-                int testId = random.Next(0, 100000);
+                int testId = 1000 + random.Next(0, 8999);
                 if (!recipeIds.Contains(testId))
                 {
                     return testId;
