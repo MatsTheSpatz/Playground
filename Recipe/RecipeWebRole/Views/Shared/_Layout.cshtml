@@ -33,11 +33,11 @@
                     @Html.ActionLink("Meine Rezepte", "MyRecipes", "Home")  <text>¦</text>           
                     @Html.ActionLink("Rezept erstellen", "CreateRecipe", "Home")  <text>¦</text>           
                     @Html.ActionLink("Profil bearbeiten", "UserProfile", "Home")  <text>¦</text>
-                    @Html.ActionLink("Logout", "LogOff", "Account")
+                    @Html.ActionLink("Sign out", "SignOut", "Account")
                 }
                 else
                 {
-                    @Html.ActionLink("Login", "Login", "Account", new { returnUrl = Request.Url.LocalPath }, null)     <text>¦</text>                          
+                    @Html.ActionLink("Sign in", "Login", "Account", new { returnUrl = Request.Url.LocalPath }, null)     <text>¦</text>                          
                     @Html.ActionLink("Register", "Register", "Account", new { returnUrl = Request.Url.LocalPath }, null)                    
                 }     
             </div>

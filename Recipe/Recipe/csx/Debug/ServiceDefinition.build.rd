@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<serviceModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="Recipe" generation="1" functional="0" release="0" Id="fc281ee0-b7d1-462d-886f-d182891fbc36" dslVersion="1.2.0.0" xmlns="http://schemas.microsoft.com/dsltools/RDSM">
+<serviceModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="Recipe" generation="1" functional="0" release="0" Id="8cf84f2e-d239-4a90-b046-092b59211def" dslVersion="1.2.0.0" xmlns="http://schemas.microsoft.com/dsltools/RDSM">
   <groups>
     <group name="RecipeGroup" generation="1" functional="0" release="0">
       <componentports>
@@ -68,9 +68,9 @@
     </group>
   </groups>
   <implements>
-    <implementation Id="16f9b368-98c1-4bb8-bc59-aadfd046fd63" ref="Microsoft.RedDog.Contract\ServiceContract\RecipeContract@ServiceDefinition.build">
+    <implementation Id="df6dc1db-281f-407b-87ca-d777fbc97bf8" ref="Microsoft.RedDog.Contract\ServiceContract\RecipeContract@ServiceDefinition.build">
       <interfacereferences>
-        <interfaceReference Id="14b1b849-62c2-442d-863b-e13d99ae0bca" ref="Microsoft.RedDog.Contract\Interface\RecipeWebRole:Endpoint1@ServiceDefinition.build">
+        <interfaceReference Id="9fa3d874-96df-430b-89ae-d7e93fe35060" ref="Microsoft.RedDog.Contract\Interface\RecipeWebRole:Endpoint1@ServiceDefinition.build">
           <inPort>
             <inPortMoniker name="/Recipe/RecipeGroup/RecipeWebRole:Endpoint1" />
           </inPort>

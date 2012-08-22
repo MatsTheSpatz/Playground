@@ -77,5 +77,13 @@ namespace RecipeWebRole
         void WSFederationAuthenticationModule_RedirectingToIdentityProvider(object sender, RedirectingToIdentityProviderEventArgs e)
         {
         }
+
+        void WSFederationAuthenticationModule_SignedIn(object sender, EventArgs e)
+        {
+        }
+
+        void WSFederationAuthenticationModule_SignedOut(object sender, EventArgs e)
+        {
+        }
     }
 }

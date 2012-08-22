@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 using Microsoft.IdentityModel.Claims;
+using Microsoft.IdentityModel.Web;
 using RecipeWebRole.ActionFilters;
 using RecipeWebRole.DataAccess;
 using RecipeWebRole.Models;
@@ -113,11 +114,12 @@ namespace RecipeWebRole.Controllers
         }
 
         //
-        // GET: /Account/LogOff
+        // GET: /Account/SignOut
 
-        public ActionResult LogOff()
+        public ActionResult SignOut()
         {
-            throw new NotImplementedException();
+            FederatedAuthentication.WSFederationAuthenticationModule.SignOut(false);
+            //FederatedAuthentication.SessionAuthenticationModule.DeleteSessionTokenCookie();
 
             return RedirectToAction("Index", "Home");
         }
