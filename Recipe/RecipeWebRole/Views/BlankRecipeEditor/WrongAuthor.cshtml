@@ -1,0 +1,18 @@
+﻿@model RecipeWebRole.Models.Recipe
+
+@{
+    ViewBag.Title = "Keine Berechtigung";
+}
+
+<h2>Keine Berechtigung.</h2>
+
+<div>
+    <p>
+        Du kannst nur die von Dir erstellten Rezepte editieren.
+    </p>
+    <p>
+        Das Rezept 
+        @Html.ActionLink(Model.Name, "Get", "Home", new { recipeId = Model.Id }, null) 
+        wurde von @(Model.Author) erstellt.
+    </p>    
+</div>

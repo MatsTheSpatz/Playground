@@ -12,6 +12,8 @@ namespace RecipeWebRole.Models
 
         public string Author { get; set; }
 
+        public string AuthorId { get; set; }
+
         public DateTime CreationDate { get; set; }
 
         public DateTime? ModificationDate { get; set; }

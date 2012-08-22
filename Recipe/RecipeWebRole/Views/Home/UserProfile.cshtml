@@ -1,6 +1,21 @@
-﻿
+﻿@model RecipeWebRole.Models.User
 @{
     ViewBag.Title = "User Profil";
 }
 
-<h2>User Profil</h2>
+<h3>Dein Profil</h3>
+
+Hallo @(Model.Name), dies sind alle Deine gespeicherten Nutzerdaten:
+
+<table>
+    <tr>
+        <td>Nutzername</td>
+        <td>@(Model.Name)</td>
+    </tr>
+    <tr>
+        <td>Id</td>
+        <td>@(Model.Id)</td>
+    </tr>
+</table>
+
+Hier findest Du eine @Html.ActionLink("List aller Rezepte, welche von Dir verwaltet werden", "MyRecipes", "Home").

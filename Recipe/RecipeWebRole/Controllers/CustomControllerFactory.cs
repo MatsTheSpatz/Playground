@@ -26,7 +26,7 @@ namespace RecipeWebRole.Controllers
                     return new AccountController(_userRepo);
 
                 case "Home": 
-                    return new HomeController(_recipeRepo);
+                    return new HomeController(_recipeRepo, _userRepo);
                 
                 case "ScannedRecipeEditor":
                     return new ScannedRecipeEditorController(_recipeRepo, _imageRepo, _ocrService);

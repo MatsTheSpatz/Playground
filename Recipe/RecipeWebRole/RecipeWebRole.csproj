@@ -158,6 +158,7 @@
     <Compile Include="DataAccess\IUserRepository.cs" />
     <Compile Include="Models\TextRecipe.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="Utilities\IdentityHelper.cs" />
     <Compile Include="Utilities\QueryString.cs" />
     <Compile Include="Models\Recipe.cs" />
     <Compile Include="DataAccess\LocalFileSystemRecipeRepository.cs" />
@@ -243,6 +244,7 @@
     <Content Include="Views\BlankRecipeEditor\Open.cshtml" />
     <Content Include="Views\BlankRecipeEditor\RecipeEditor.cshtml" />
     <Content Include="Views\Home\Get.cshtml" />
+    <Content Include="Views\BlankRecipeEditor\WrongAuthor.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="favicon.ico" />

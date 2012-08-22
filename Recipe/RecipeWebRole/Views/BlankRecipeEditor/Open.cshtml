@@ -1,4 +1,6 @@
-﻿@{
+﻿@model RecipeWebRole.Models.Recipe
+
+@{
     Layout = null;
 }
 
@@ -76,9 +78,9 @@
                 // script must only execute once html-files are fully loaded!
                 recipeEditor.init();
 
-                @if(ViewBag.Recipe != null)
+                @if(Model != null)
                 {
-                    @:var jsonText = '@Html.Raw(Json.Encode(ViewBag.Recipe)) ';
+                    @:var jsonText = '@Html.Raw(Json.Encode(Model)) ';
                     @:var data = jQuery.parseJSON(jsonText);
                     @:recipe.persistence.setData(data);
                 }

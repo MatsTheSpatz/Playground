@@ -41,7 +41,7 @@ namespace RecipeWebRole.Controllers
 
             // The user successfully authenticated.
 
-            string nameIdentifier = GetUserNameIdentifier();
+            string nameIdentifier = this.GetUserNameIdentifier();
             if (!_userRepo.IsExistingUser(nameIdentifier))
             {
                 // New user. Redirect to page for recording user name.
@@ -53,6 +53,7 @@ namespace RecipeWebRole.Controllers
             // Redirect back to the page the user was querying.
             return new RedirectResult(returnUrl);
         }
+
 
         //
         // GET: /Account/RequiresLogin
@@ -78,7 +79,6 @@ namespace RecipeWebRole.Controllers
         }
 
 
-
         //
         // GET: /Account/UserData
 
@@ -89,6 +89,7 @@ namespace RecipeWebRole.Controllers
             return View();
         }
 
+
         //
         // POST: /Account/UserData
 
@@ -97,7 +98,7 @@ namespace RecipeWebRole.Controllers
         {
             //string username = Request.Form["username"];
             
-            string userIdentifier = GetUserNameIdentifier();
+            string userIdentifier = this.GetUserNameIdentifier();
 
             // TODO: validate that username is valid!
             _userRepo.AddUser(new User { Id = userIdentifier, Name = username });
@@ -120,19 +121,5 @@ namespace RecipeWebRole.Controllers
 
             return RedirectToAction("Index", "Home");
         }
-
-
-        private string GetUserNameIdentifier()
-        {
-            var identity = (IClaimsIdentity)User.Identity;
-            Claim claim = identity.Claims.FirstOrDefault(c => c.ClaimType == ClaimTypes.NameIdentifier);
-
-            if (claim == null)
-            {
-                throw new ArgumentException("Invalid Claim Identity. Need at least name identifier.");
-            }
-
-            return claim.Value ?? String.Empty;
-        }     
     }
 }

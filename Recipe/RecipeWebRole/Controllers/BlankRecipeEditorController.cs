@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Web;
+using System.Web.Caching;
 using System.Web.Mvc;
+using Microsoft.IdentityModel.Claims;
 using RecipeWebRole.DataAccess;
 using RecipeWebRole.Models;
 using System;
@@ -13,8 +15,11 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using RecipeWebRole.Utilities;
+
 namespace RecipeWebRole.Controllers
 {
+    [ActionFilters.Authorize]
     public class BlankRecipeEditorController : Controller
     {
         private readonly IRecipeRepository _recipeRepo;
@@ -24,39 +29,49 @@ namespace RecipeWebRole.Controllers
             _recipeRepo = recipeRepo;
         }
 
-         public ActionResult RecipeEditor()
-         {
-             Thread.Sleep(1000);
-             return PartialView();
-         }
-        
-
         //
         // GET: /BlankRecipeEditor/Open
 
         public ActionResult Open(int recipeId)
         {
             Recipe recipe;
-            if (recipeId <= 0)
+            if (recipeId > 0)
             {
-                recipe = new TextRecipe {Author = User.Identity.Name, CreationDate = DateTime.Now};
-                _recipeRepo.SetRecipe(recipe);
+                // Existing recipe is being edited.
+                // Validate that only the initial author of the recipe can edit it.
+                recipe = _recipeRepo.GetRecipe(recipeId);
+                
+                string currentAuthorId =  this.GetUserNameIdentifier();
+                if (recipe.AuthorId != currentAuthorId)
+                {
+                    return View("WrongAuthor", recipe);
+                }
             }
             else
             {
-                recipe = _recipeRepo.GetRecipe(recipeId);
+                recipe = new TextRecipe
+                             {
+                                 Author = this.GetUserName(),
+                                 AuthorId = this.GetUserNameIdentifier(),
+                                 CreationDate = DateTime.Now
+                             };
+                _recipeRepo.SetRecipe(recipe);
             }
 
-            //recipe.IsVegetarian = true;
-            //recipe.DishCategories = new [] { DishCategory.Starter, DishCategory.Soup, };
-            //recipe.Seasons = new[] { Season.Winter };
-            //recipe.SkillLevel = SkillLevel.Average;
-            ViewBag.Recipe = recipe;
-
-            return View();
+            return View(recipe);
         }
 
 
+        //
+        // GET: /BlankRecipeEditor/RecipeEditor
+
+        [HttpGet]
+        public ActionResult RecipeEditor()
+        {
+            Thread.Sleep(1000);
+            return PartialView();
+        }
+        
 
         //
         // POST: /BlankRecipeEditor/Save
@@ -64,12 +79,21 @@ namespace RecipeWebRole.Controllers
         [HttpPost]
         public JsonResult Save(TextRecipe recipe)
         {
+            recipe.Author = this.GetUserName();
+            recipe.AuthorId = this.GetUserNameIdentifier();
+
+            // The recipe must belong to the current user.
+            string oldAuthorId = _recipeRepo.GetRecipe(recipe.Id).AuthorId;
+            if (oldAuthorId != recipe.AuthorId)
+            {
+                throw new InvalidOperationException("Invalid author. The author must not change.");
+            }
+
             _recipeRepo.SetRecipe(recipe);
 
             Thread.Sleep(1000);
             //  throw new ArgumentException("Bad things happended");
             return Json(recipe);
-        }
-
+        }        
     }
 }

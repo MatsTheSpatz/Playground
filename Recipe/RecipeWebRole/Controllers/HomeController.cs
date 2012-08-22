@@ -16,14 +16,16 @@ using RecipeWebRole.Utilities;
 
 namespace RecipeWebRole.Controllers
 {
-  //  [ActionFilters.Authorize]
+    [ActionFilters.Authorize]
     public class HomeController : Controller
     {
         private readonly IRecipeRepository _recipeRepo;
+        private readonly IUserRepository _userRepo;
 
-        public HomeController(IRecipeRepository recipeRepo)
+        public HomeController(IRecipeRepository recipeRepo, IUserRepository userRepo)
         {
             _recipeRepo = recipeRepo;
+            _userRepo = userRepo;
         }
 
 
@@ -36,15 +38,32 @@ namespace RecipeWebRole.Controllers
         {
 
             IList<int> ids = _recipeRepo.GetRecipeIds();
-            IEnumerable<Tuple<int, string>> data = (from id in ids
-                                                    let name = _recipeRepo.GetRecipe(id).Name
-                                                    select new Tuple<int, string>(id, name)).ToList();
+            IEnumerable<Tuple<int, string>> data = from id in ids
+                                                   let name = _recipeRepo.GetRecipe(id).Name
+                                                   select new Tuple<int, string>(id, name);
             return View(data);
         }
 
 
         //
-        // GET: /Home/Index
+        // GET: /Home/Get
+
+        [HttpGet]
+        [AllowAnonymous]
+        public ActionResult Get(int recipeId)
+        {
+            Recipe recipe = _recipeRepo.GetRecipe(recipeId);
+            if (recipe == null)
+            {
+                throw new ArgumentException("Invalid recipe-Id " + recipeId);
+            }
+
+            return View(recipe as TextRecipe);
+        }
+
+
+        //
+        // GET: /Home/SearchRecipe
 
         [HttpGet]
         [AllowAnonymous]
@@ -58,7 +77,6 @@ namespace RecipeWebRole.Controllers
         // GET: /Home/CreateRecipe
 
         [HttpGet]
-        [AllowAnonymous]
         public ActionResult CreateRecipe()
         {
             return View();
@@ -69,29 +87,34 @@ namespace RecipeWebRole.Controllers
         // GET: /Home/UserProfile
 
         [HttpGet]
-        [AllowAnonymous]
         public ActionResult UserProfile()
         {
-            return View();
+            string userId = this.GetUserNameIdentifier();
+            User user;
+            if (!_userRepo.TryGetUser(userId, out user))
+            {
+                throw new InvalidOperationException("User Profile does not exist for this user.");
+            }
+
+            return View(user);
         }
 
 
         //
-        // GET: /Home/UserProfile
+        // GET: /Home/MyRecipes
 
         [HttpGet]
-        [AllowAnonymous]
-        public ActionResult Get(int recipeId)
+        public ActionResult MyRecipes()
         {
-            Recipe recipe = _recipeRepo.GetRecipe(recipeId);
-            if (recipe == null)
-            {
-                throw new ArgumentException("Invalid recipe-Id " + recipeId);
-            }
+            string userId = this.GetUserNameIdentifier();
 
-            return View(recipe as TextRecipe);
+            IList<int> ids = _recipeRepo.GetRecipeIds();
+            IEnumerable<Tuple<int, string>> data = from id in ids
+                                                   let recipe = _recipeRepo.GetRecipe(id)
+                                                   where recipe.AuthorId == userId
+                                                   select new Tuple<int, string>(recipe.Id, recipe.Name);
 
-
+            return View("Index", data);
         }
     }
 }
